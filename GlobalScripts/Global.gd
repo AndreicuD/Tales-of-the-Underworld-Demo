@@ -2,6 +2,8 @@ extends Node
 
 var HEALTH = 100
 var MAX_HEALTH = 100
+var CURRENCY : int = 0
+var CURRENT_LEVEL_CURRENCY : int = 0
 var is_player_dead = false
 
 var gravity_cooldown : Timer
@@ -16,7 +18,9 @@ var default_spawn_point_gravity : String = 'down'
 
 #----------------------------------------------------------
 
-var current_level : String
+var levels_visited : Array[String]
+var current_level : String = "Start"
+var max_level : String = "Menu"
 var has_save_file : bool = false
 
 func _ready():
@@ -25,11 +29,17 @@ func _ready():
 	gravity_cooldown.wait_time = 1
 	gravity_cooldown.one_shot = true
 	add_child(gravity_cooldown)
-	#load_game()
+	load_game()
 	pass
 
 func _physics_process(_delta):
 	#reset player if health is below 0
+	if !Global.levels_visited.is_empty():
+		max_level = levels_visited.back()
+	else:
+		max_level = "Menu"
+	if Input.is_action_just_pressed("Reset"):
+		reset_player_to_checkpoint()
 	if(HEALTH<=0):
 		player_death()
 
@@ -40,14 +50,31 @@ func color_manager_play_transition(string : String):
 
 #----------------------------------------------------------
 
+func reset_game():
+	CURRENCY = 0
+	CURRENT_LEVEL_CURRENCY = 0
+
+	MAX_HEALTH = default_max_health
+	HEALTH = default_max_health
+
+	levels_visited = []
+
+	spawn_point = default_spawn_point
+	spawn_point_gravity = default_spawn_point_gravity
+
 #https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 #look at this if you have problems
 func save_game():
 	var save_game_file = FileAccess.open("res://savegame.save", FileAccess.WRITE)
 
-	var max_health_dic = {
-		"what_is_saved" : "max_health",
-		"amount" : MAX_HEALTH
+	var currency_dic = {
+		"what_is_saved" : "currency",
+		"amount" : CURRENCY
+	}
+
+	var level_dic = {
+		"what_is_saved" : "levels_visited",
+		"levels" : levels_visited
 	}
 
 	var spawn_point_dic = {
@@ -56,10 +83,14 @@ func save_game():
 		"gravity" : get_spawn_point_gravity(),
 	}
 
-	var max_health_info = JSON.stringify(max_health_dic)
-	save_game_file.store_line(max_health_info)
+	var currency_info = JSON.stringify(currency_dic)
+	save_game_file.store_line(currency_info)
+	var level_info = JSON.stringify(level_dic)
+	save_game_file.store_line(level_info)
 	var spawn_point_info = JSON.stringify(spawn_point_dic)
 	save_game_file.store_line(spawn_point_info)
+
+	print("Game Saved")
 
 func load_game():
 	if not FileAccess.file_exists("res://savegame.save"):
@@ -87,8 +118,14 @@ func load_game():
 		match node_data["what_is_saved"]:
 			"spawn_point":
 				set_spawn_point(str_to_var(node_data["position"]), node_data["gravity"])
-			"max_health":
-				set_max_health(float(node_data["amount"]))
+			"currency":
+				set_currency(node_data['amount'])
+				CURRENT_LEVEL_CURRENCY = 0
+			"levels_visited":
+				for level in node_data['levels']:
+					levels_visited.push_back(level)
+
+	print("Game Loaded")
 
 func delete_save():
 	var dir = DirAccess.open("res://")
@@ -121,17 +158,14 @@ func reset_player_to_checkpoint():
 func player_death():
 	reset_player_to_checkpoint()
 
-func death_timer_timeout():
-	TransitionManager.play_transition("Death_Fade_Out")
-	#is_player_dead = false
-	reset_player_position_and_health()
-
 #----------------------------------------------------------
 
 func set_spawn_point(new_point, new_gravity):
-	spawn_point = new_point
-	spawn_point_gravity = new_gravity
-	save_game()
+	if(current_level != "Menu"):
+		spawn_point = new_point
+		spawn_point_gravity = new_gravity
+		print("Spawn Point Set - ", spawn_point)
+		save_game()
 
 func get_spawn_point():
 	return spawn_point
@@ -157,6 +191,14 @@ func heal_health(healAmount):
 
 func take_damage(damage):
 	HEALTH -= damage
+
+func get_currency():
+	return CURRENCY + CURRENT_LEVEL_CURRENCY
+func set_currency(amount):
+	CURRENCY = amount
+func load_currency():
+	CURRENCY += CURRENT_LEVEL_CURRENCY
+	CURRENT_LEVEL_CURRENCY = 0
 
 func force_gravity_down():
 	var new_gravity = abs(ProjectSettings.get_setting("physics/2d/default_gravity"))

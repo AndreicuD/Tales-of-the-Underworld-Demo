@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://b270mb2r5cgia"]
+[gd_scene load_steps=16 format=3 uid="uid://b270mb2r5cgia"]
 
 [ext_resource type="Script" uid="uid://cqxh8r6w3ii8r" path="res://GlobalScripts/scene_switcher.gd" id="1_75af8"]
-[ext_resource type="PackedScene" uid="uid://g1nb3d5trphu" path="res://GlobalScripts/Global.tscn" id="2_al6ck"]
 [ext_resource type="PackedScene" uid="uid://c1mre2qrte5s2" path="res://Player/player.tscn" id="3_3i4ib"]
 [ext_resource type="Script" uid="uid://biqk7kx2p7vwk" path="res://GlobalScripts/Transition_Manager.gd" id="3_8mv83"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="4_2mq4s"]
+[ext_resource type="PackedScene" uid="uid://jlgwph233g4d" path="res://Levels/Menu.tscn" id="4_r0x5m"]
 [ext_resource type="Shader" uid="uid://43vs7xlyybk1" path="res://Assets/Shaders/InvertColor.gdshader" id="6_3mrqo"]
-[ext_resource type="PackedScene" uid="uid://dasb6pgsbw6lt" path="res://Levels/Tutorial.tscn" id="6_ua8u0"]
 
 [sub_resource type="Animation" id="Animation_ewint"]
 resource_name = "Death_Fade_In"
@@ -151,8 +150,6 @@ shader = ExtResource("6_3mrqo")
 [node name="SceneManager" type="Node" groups=["scene_manager"]]
 script = ExtResource("1_75af8")
 
-[node name="Global" parent="." instance=ExtResource("2_al6ck")]
-
 [node name="TransitionManager" type="AnimationPlayer" parent="." groups=["screen_animator"]]
 root_node = NodePath("../Fade")
 libraries = {
@@ -165,6 +162,8 @@ environment = SubResource("Environment_ds612")
 
 [node name="Player" parent="." instance=ExtResource("3_3i4ib")]
 position = Vector2(0, 9)
+
+[node name="Menu" parent="." instance=ExtResource("4_r0x5m")]
 
 [node name="Fade" type="CanvasLayer" parent="."]
 layer = 128
@@ -214,8 +213,6 @@ grow_vertical = 0
 text = "How does that make you feel?"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Level1" parent="." instance=ExtResource("6_ua8u0")]
 
 [node name="ColorManager" type="AnimationPlayer" parent="." groups=["screen_animator"]]
 root_node = NodePath("../Fade")

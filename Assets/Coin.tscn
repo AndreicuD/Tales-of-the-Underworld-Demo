@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqkdcvcop5k06"]
+[gd_scene load_steps=12 format=3 uid="uid://bqkdcvcop5k06"]
 
 [ext_resource type="Texture2D" uid="uid://b51l63qahh8xq" path="res://Arta/Tiles/Transparent/tile_0002.png" id="1_rss4a"]
 [ext_resource type="Script" uid="uid://crw7loc7otg8u" path="res://Assets/Scripts/Coin.gd" id="2_sknaa"]
+[ext_resource type="AudioStream" uid="uid://dr6acf1p7u3l8" path="res://Arta/Sunet/Coin/coin_1.wav" id="3_c6que"]
+[ext_resource type="AudioStream" uid="uid://b2n54tc0ds1g6" path="res://Arta/Sunet/Coin/coin_2.wav" id="4_hoe1y"]
+[ext_resource type="AudioStream" uid="uid://dagksnc3nr5fs" path="res://Arta/Sunet/Coin/coin_3.wav" id="5_16v10"]
+[ext_resource type="AudioStream" uid="uid://3ld3tp4q3cwa" path="res://Arta/Sunet/Coin/coin_4.wav" id="6_tivnu"]
+[ext_resource type="AudioStream" uid="uid://dfn6u7eb374jt" path="res://Arta/Sunet/Coin/coin_5.wav" id="7_nrrxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejw76"]
 size = Vector2(14, 14)
@@ -28,20 +33,35 @@ _data = {
 &"default": SubResource("Animation_1hasy")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wm4ua"]
+playback_mode = 1
+random_pitch = 1.21
+streams_count = 5
+stream_0/stream = ExtResource("3_c6que")
+stream_1/stream = ExtResource("4_hoe1y")
+stream_2/stream = ExtResource("5_16v10")
+stream_3/stream = ExtResource("6_tivnu")
+stream_4/stream = ExtResource("7_nrrxb")
+
 [node name="Coin" type="Area2D"]
+script = ExtResource("2_sknaa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ejw76")
 
 [node name="CoinSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_rss4a")
-script = ExtResource("2_sknaa")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CoinSprite"]
-autoplay = "default"
 reset_on_save = false
 libraries = {
-"": SubResource("AnimationLibrary_377m4")
+&"": SubResource("AnimationLibrary_377m4")
 }
+autoplay = "default"
 
-[connection signal="body_entered" from="." to="CoinSprite" method="_on_area_2d_body_entered"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_wm4ua")
+bus = &"Player"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

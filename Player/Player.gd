@@ -16,6 +16,7 @@ var has_changed_gravity: bool = false
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var box_ray : RayCast2D = $Box_Raycast
+@onready var box_ray_down : RayCast2D = $Box_Raycast_Down
 
 @onready var die_particles : GPUParticles2D = $Die_Particles
 @onready var die_particle_material : ParticleProcessMaterial = die_particles.process_material
@@ -36,6 +37,12 @@ func is_on_ground():
 	if is_gravity_reversed and is_on_ceiling():
 		return true
 	if !is_gravity_reversed and is_on_floor():
+		return true
+	return false
+func is_on_ceiling_custom():
+	if is_gravity_reversed and is_on_floor():
+		return true
+	if !is_gravity_reversed and is_on_ceiling():
 		return true
 	return false
 
@@ -107,7 +114,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	if(box_ray.is_colliding() && is_on_ground()):
+	if (box_ray.is_colliding() && is_on_ground()) || (box_ray_down.is_colliding() && is_on_ceiling_custom()):
 		die()
 
 	for index in get_slide_collision_count():

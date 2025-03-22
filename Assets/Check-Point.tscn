@@ -27,7 +27,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CheckPoint" type="Area2D"]
+[node name="CheckPoint" type="Area2D" groups=["Checkpoint"]]
 collision_layer = 0
 script = ExtResource("1_mly0o")
 
