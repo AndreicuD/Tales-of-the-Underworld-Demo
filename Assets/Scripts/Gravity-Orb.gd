@@ -1,8 +1,5 @@
 extends Area2D
 
-#what was the gravity before like
-var before : bool
-
 #active is true if player is in area
 var active : bool = false
 #disable bool to...disable the orb
@@ -16,18 +13,17 @@ func _process(_delta):
 		anim.play("Disappear")
 		disabled = true
 		active=false
+		Global.invert_gravity(true);
+		$Particles.emitting = true
 		cooldownTimer.start()
 
 func _on_body_entered(body):
 	if body.is_in_group("Player") and !disabled:
 		active=true;
-		before = body.has_changed_gravity
-		body.has_changed_gravity = false
 
 func _on_body_exited(body):
 	if body.is_in_group("Player") and !disabled:
 		active=false;
-		body.has_changed_gravity = before
 
 func _on_timer_timeout():
 	disabled=false

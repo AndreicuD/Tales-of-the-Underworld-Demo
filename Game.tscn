@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b270mb2r5cgia"]
+[gd_scene load_steps=17 format=3 uid="uid://b270mb2r5cgia"]
 
 [ext_resource type="Script" uid="uid://cqxh8r6w3ii8r" path="res://GlobalScripts/scene_switcher.gd" id="1_75af8"]
+[ext_resource type="AudioStream" uid="uid://m4b7jjlk0b0c" path="res://Arta/Sunet/FIICode-Game.ogg" id="2_3mrqo"]
 [ext_resource type="PackedScene" uid="uid://c1mre2qrte5s2" path="res://Player/player.tscn" id="3_3i4ib"]
 [ext_resource type="Script" uid="uid://biqk7kx2p7vwk" path="res://GlobalScripts/Transition_Manager.gd" id="3_8mv83"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="4_2mq4s"]
@@ -149,6 +150,11 @@ shader = ExtResource("6_3mrqo")
 
 [node name="SceneManager" type="Node" groups=["scene_manager"]]
 script = ExtResource("1_75af8")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3mrqo")
+autoplay = true
+bus = &"Music"
 
 [node name="TransitionManager" type="AnimationPlayer" parent="." groups=["screen_animator"]]
 root_node = NodePath("../Fade")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7ta8d0y8wf2v"]
+[gd_scene load_steps=11 format=3 uid="uid://c7ta8d0y8wf2v"]
 
 [ext_resource type="Script" uid="uid://nnitybdgptbr" path="res://Assets/Scripts/Gravity-Orb.gd" id="1_g81dw"]
 [ext_resource type="Texture2D" uid="uid://delcvaymxwyfr" path="res://Arta/Tiles/Transparent/tile_0022.png" id="2_k7bi7"]
@@ -6,17 +6,38 @@
 [sub_resource type="Animation" id="Animation_8w2ek"]
 resource_name = "Disappear"
 length = 0.5
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.85, 1.85), Vector2(0.5, 0.5)]
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.85, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.85, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
 }
 
 [sub_resource type="Animation" id="Animation_f4725"]
@@ -60,27 +81,93 @@ tracks/2/keys = {
 "values": [0.0, 1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_xkq7j"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vl2iv"]
 _data = {
 &"Disappear": SubResource("Animation_8w2ek"),
+&"RESET": SubResource("Animation_xkq7j"),
 &"default": SubResource("Animation_f4725")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deu72"]
 size = Vector2(36, 34)
 
+[sub_resource type="Curve" id="Curve_xkq7j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.580882, 0.685393), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cf3bh"]
+curve = SubResource("Curve_xkq7j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b1on0"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 0.895
+initial_velocity_min = 45.97
+initial_velocity_max = 74.7
+angular_velocity_min = -132.41
+angular_velocity_max = 107.59
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -3.45
+linear_accel_max = 4.6
+radial_accel_min = -27.59
+radial_accel_max = 8.04
+tangential_accel_min = -33.33
+tangential_accel_max = 12.64
+damping_min = 1.149
+damping_max = 9.77
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_cf3bh")
+turbulence_enabled = true
+
 [node name="Gravity Orb" type="Area2D"]
 script = ExtResource("1_g81dw")
 
 [node name="OrbSprite" type="Sprite2D" parent="."]
-modulate = Color(0.937255, 0.996078, 1, 1)
-scale = Vector2(1.85, 1.85)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("2_k7bi7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OrbSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_vl2iv")
+&"": SubResource("AnimationLibrary_vl2iv")
 }
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_deu72")
@@ -88,6 +175,14 @@ shape = SubResource("RectangleShape2D_deu72")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 13
+sub_emitter = NodePath(".")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b1on0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

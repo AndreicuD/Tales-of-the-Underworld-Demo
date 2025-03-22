@@ -24,7 +24,7 @@ var max_level : String = "Menu"
 var has_save_file : bool = false
 
 func _ready():
-	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
 	gravity_cooldown.wait_time = 1
 	gravity_cooldown.one_shot = true
@@ -224,23 +224,28 @@ func force_gravity_up():
 	Player.set_scale(Vector2(Player.scale.x, -abs(Player.scale.y)))
 	Player.has_changed_gravity = false
 
-func invert_gravity():
-	if gravity_cooldown.is_stopped():
+func force_gravity_invert():
+	print("Gravity Changed")
+
+	var new_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * -1
+	ProjectSettings.set_setting("physics/2d/default_gravity", new_gravity)
+
+	var Player = get_tree().get_first_node_in_group("Player")
+	Player.is_gravity_reversed = !Player.is_gravity_reversed
+	Player.jump_power *= -1
+	if Player.is_gravity_reversed:
+		color_manager_play_transition("InvertColor_FadeIn")
+	else:
+		color_manager_play_transition("InvertColor_FadeOut")
+	Player.set_particles_gravity((-1 if Player.is_gravity_reversed else 1))
+	Player.set_scale(Vector2(Player.scale.x, abs(Player.scale.y) * (-1 if Player.is_gravity_reversed else 1)))
+	Player.has_changed_gravity = true
+
+func invert_gravity(force_invert : bool = false):
+	if !force_invert && gravity_cooldown.is_stopped():
 		gravity_cooldown.start()
-		print("Gravity Changed")
-
-		var new_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * -1
-		ProjectSettings.set_setting("physics/2d/default_gravity", new_gravity)
-
-		var Player = get_tree().get_first_node_in_group("Player")
-		Player.is_gravity_reversed = !Player.is_gravity_reversed
-		Player.jump_power *= -1
-		if Player.is_gravity_reversed:
-			color_manager_play_transition("InvertColor_FadeIn")
-		else:
-			color_manager_play_transition("InvertColor_FadeOut")
-		Player.set_particles_gravity((-1 if Player.is_gravity_reversed else 1))
-		Player.set_scale(Vector2(Player.scale.x, abs(Player.scale.y) * (-1 if Player.is_gravity_reversed else 1)))
-		Player.has_changed_gravity = true
+		force_gravity_invert()
+	else:
+		force_gravity_invert()
 
 #----------------------------------------------------------

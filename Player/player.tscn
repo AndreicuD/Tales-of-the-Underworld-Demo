@@ -230,6 +230,7 @@ autostart = true
 
 [node name="Jump_Audio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_fhl08")
+volume_db = -6.934
 max_polyphony = 4
 bus = &"Player"
 
