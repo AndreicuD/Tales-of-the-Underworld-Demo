@@ -24,7 +24,7 @@ var max_level : String = "Menu"
 var has_save_file : bool = false
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
 	gravity_cooldown.wait_time = 1
 	gravity_cooldown.one_shot = true

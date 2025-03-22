@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8ls5tnhfvtkc"]
+[gd_scene load_steps=10 format=3 uid="uid://b8ls5tnhfvtkc"]
 
+[ext_resource type="Script" uid="uid://cw7wyag1thfco" path="res://Assets/Scripts/Settings_Door.gd" id="1_oulyn"]
 [ext_resource type="Texture2D" uid="uid://dmode7n8bpsqd" path="res://Arta/Tiles/Transparent/tile_0057.png" id="2_qa6y4"]
 [ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="3_i08i7"]
 [ext_resource type="Texture2D" uid="uid://bi55n7oupfool" path="res://Arta/Tiles/Transparent/tile_0058.png" id="4_f46rc"]
@@ -41,6 +42,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Settings Door" type="Area2D"]
+script = ExtResource("1_oulyn")
 
 [node name="DoorSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3u6p4")
@@ -96,18 +98,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="Label" type="Label" parent="PopUp/BoxContainer/GridContainer"]
+[node name="Music" type="Label" parent="PopUp/BoxContainer/GridContainer"]
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
-[node name="HSlider" type="HSlider" parent="PopUp/BoxContainer/GridContainer"]
+[node name="Music_Slider" type="HSlider" parent="PopUp/BoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="pressed" from="PopUp/Save Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="PopUp/BoxContainer/GridContainer/Music_Slider" to="." method="_on_music_slider_value_changed"]

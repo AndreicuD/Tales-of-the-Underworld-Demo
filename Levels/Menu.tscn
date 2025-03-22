@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://jlgwph233g4d"]
+[gd_scene load_steps=16 format=4 uid="uid://jlgwph233g4d"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_j0r6d"]
 [ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="2_1pg2v"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://sdyq2testeop" path="res://Assets/NewGame-Door.tscn" id="6_ajojk"]
 [ext_resource type="PackedScene" uid="uid://b4i6s47201kro" path="res://Assets/QuitGame-Door.tscn" id="7_ajojk"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="7_jkmg0"]
+[ext_resource type="Script" uid="uid://cw7wyag1thfco" path="res://Assets/Scripts/Settings_Door.gd" id="8_j0r6d"]
 [ext_resource type="PackedScene" uid="uid://b8ls5tnhfvtkc" path="res://Assets/Settings-Door.tscn" id="8_k1aj7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1jgvg"]
@@ -1883,6 +1884,7 @@ tile_set = SubResource("TileSet_es6y3")
 [node name="Controls Grid" type="TileMapLayer" parent="Tilemaps"]
 use_parent_material = true
 scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD/////AAAhAAQAAAAAAP//AAAfAAQAAAD///7/AAAEAAIAAAAAAP7/AAACAAIAAAA=")
 tile_set = SubResource("TileSet_tybos")
 
 [node name="Title" type="Label" parent="."]
@@ -1949,6 +1951,7 @@ position = Vector2(-56, 72)
 [node name="Quit Game" parent="." instance=ExtResource("7_ajojk")]
 position = Vector2(-56, -56)
 rotation = 3.14159
+script = ExtResource("8_j0r6d")
 
 [node name="Settings Door" parent="." instance=ExtResource("8_k1aj7")]
 position = Vector2(56, -56)
