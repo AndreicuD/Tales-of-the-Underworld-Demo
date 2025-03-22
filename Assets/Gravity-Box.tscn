@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv2yxfc2ualvp"]
+
+[ext_resource type="Script" uid="uid://cgv7gr0kev3o4" path="res://GlobalScripts/Custom_Gravity.gd" id="1_g31ov"]
+[ext_resource type="Texture2D" uid="uid://dqobu5uatxav1" path="res://Arta/Tilemap/Individual/046.png" id="2_g31ov"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cab4y"]
+size = Vector2(16, 16)
+
+[node name="Gravity_Box" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 4
+gravity_scale = 0.0
+script = ExtResource("1_g31ov")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_g31ov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cab4y")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7ta8d0y8wf2v"]
+
+[ext_resource type="Script" uid="uid://nnitybdgptbr" path="res://Assets/Scripts/Gravity-Orb.gd" id="1_g81dw"]
+[ext_resource type="Texture2D" uid="uid://delcvaymxwyfr" path="res://Arta/Tiles/Transparent/tile_0022.png" id="2_k7bi7"]
+
+[sub_resource type="Animation" id="Animation_8w2ek"]
+resource_name = "Disappear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.85, 1.85), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_f4725"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1.46409, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, -1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.82, 1.82)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 2.54912),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vl2iv"]
+_data = {
+&"Disappear": SubResource("Animation_8w2ek"),
+&"default": SubResource("Animation_f4725")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_deu72"]
+size = Vector2(36, 34)
+
+[node name="Gravity Orb" type="Area2D"]
+script = ExtResource("1_g81dw")
+
+[node name="OrbSprite" type="Sprite2D" parent="."]
+modulate = Color(0.937255, 0.996078, 1, 1)
+scale = Vector2(1.85, 1.85)
+texture = ExtResource("2_k7bi7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OrbSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_vl2iv")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_deu72")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnsro2ic50god"]
+
+[ext_resource type="Script" uid="uid://dlw3x8mx4382q" path="res://GlobalScripts/CheckPoint.gd" id="1_mly0o"]
+[ext_resource type="Texture2D" uid="uid://brp3efcgk7rsf" path="res://Arta/Tilemap/Individual/397.png" id="2_3keax"]
+[ext_resource type="Texture2D" uid="uid://jrky23tretr7" path="res://Arta/Tilemap/Individual/396.png" id="3_pu24e"]
+[ext_resource type="Texture2D" uid="uid://3acii2dqg60f" path="res://Arta/Tilemap/Individual/202.png" id="4_itd2k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0oeb"]
+size = Vector2(16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ult7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3keax")
+}],
+"loop": true,
+"name": &"activated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pu24e")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
+
+[node name="CheckPoint" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_mly0o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_f0oeb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_ult7s")
+animation = &"normal"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_itd2k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
