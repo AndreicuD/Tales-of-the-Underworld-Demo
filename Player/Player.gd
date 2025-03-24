@@ -25,10 +25,11 @@ var has_changed_gravity: bool = false
 @onready var jump_particles : GPUParticles2D = $Jump_Particles
 @onready var jump_particle_material : ParticleProcessMaterial = jump_particles.process_material
 
+@onready var dead_audio = $Dead_Audio
+@onready var gravity_audio = $Gravity_Audio
 @onready var jump_audio = $Jump_Audio
-
-@onready var walk_audio_timer = $Walk_Audio_Timer
 @onready var walk_audio = $Walk_Audio
+@onready var walk_audio_timer = $Walk_Audio_Timer
 
 var has_key : bool = false
 
@@ -62,14 +63,18 @@ func die():
 	Global.play_transition("Death_Fade_In")
 	remove_danger_collision()
 	death_timer.start()
+	is_dead = true
 	can_move = false
 	die_particles.emitting = true
 	anim.play("Dead")
+	dead_audio.play()
 
 func _on_death_timer_timeout():
 	Global.play_transition("Death_Fade_Out")
 	add_danger_collision()
 	Global.player_death()
+	is_dead = false
+
 func _on_transition_manager_animation_finished(anim_name):
 	if(anim_name == "Death_Fade_Out"):
 		can_move = true
@@ -93,6 +98,7 @@ func _physics_process(delta):
 		jump_particles.emitting = true
 	elif Input.is_action_just_pressed("Jump") and !is_on_ground() and !has_changed_gravity and Global.can_change_gravity:
 		Global.invert_gravity()
+		gravity_audio.play()
 
 	direction_x = Input.get_axis("Left", "Right")
 
@@ -114,7 +120,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	if (box_ray.is_colliding() && is_on_ground()) || (box_ray_down.is_colliding() && is_on_ceiling_custom()):
+	if !is_dead && ((box_ray.is_colliding() && is_on_ground()) || (box_ray_down.is_colliding() && is_on_ceiling_custom())):
 		die()
 
 	for index in get_slide_collision_count():

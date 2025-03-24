@@ -21,7 +21,8 @@ func _process(_delta):
 				anim.play("opened")
 				is_opened = true
 		elif is_opened:
-			get_tree().get_first_node_in_group("scene_manager").change_level(Global.max_level, true)
+			Global.load_scene(Global.max_level, true)
+			$Game_Start_Audio.play()
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):

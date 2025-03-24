@@ -1,8 +1,11 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://beoh5k5sb22ui"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://beoh5k5sb22ui"]
 
 [ext_resource type="FontFile" uid="uid://co0gh0dxjwg04" path="res://Arta/Retro Gaming.ttf" id="1_7u3ge"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m0iny"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1s1p"]
+bg_color = Color(0, 0, 0, 1)
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -12,6 +15,8 @@ Button/colors/font_hover_pressed_color = Color(0.501407, 0.501406, 0.501406, 1)
 Button/colors/font_pressed_color = Color(0.266575, 0.266575, 0.266575, 1)
 Button/fonts/font = ExtResource("1_7u3ge")
 Button/styles/focus = SubResource("StyleBoxEmpty_m0iny")
+CheckButton/colors/font_color = Color(0, 0, 0, 1)
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_y1s1p")
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.2)
 Label/fonts/font = ExtResource("1_7u3ge")
 RichTextLabel/font_sizes/normal_font_size = 16

@@ -1,9 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://c1mre2qrte5s2"]
+[gd_scene load_steps=39 format=3 uid="uid://c1mre2qrte5s2"]
 
 [ext_resource type="Script" uid="uid://c1qleelweotns" path="res://Player/Player.gd" id="1_bbnet"]
 [ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="2_l3dg1"]
 [ext_resource type="AudioStream" uid="uid://bsi4sr6jk4fn0" path="res://Arta/Sunet/Player/jump_5.wav" id="3_gwnis"]
+[ext_resource type="AudioStream" uid="uid://sy2pnp1p3rib" path="res://Arta/Sunet/Player/dead_1.wav" id="3_lfmf2"]
+[ext_resource type="AudioStream" uid="uid://dhcyivoc1dnia" path="res://Arta/Sunet/Player/gravity.wav" id="3_p5o4e"]
 [ext_resource type="AudioStream" uid="uid://5yvwoq45plgm" path="res://Arta/Sunet/Player/jump_4.wav" id="4_k53q1"]
+[ext_resource type="AudioStream" uid="uid://dtbu66gf4pk1i" path="res://Arta/Sunet/Player/dead_2.wav" id="4_pisgm"]
+[ext_resource type="AudioStream" uid="uid://b5x0gyybse2fl" path="res://Arta/Sunet/Player/dead_3.wav" id="5_b1ygp"]
 [ext_resource type="AudioStream" uid="uid://dsmfbgxppbkux" path="res://Arta/Sunet/Player/jump_1.wav" id="5_vtle1"]
 [ext_resource type="AudioStream" uid="uid://dn2dcaqsy7t01" path="res://Arta/Sunet/Player/jump_2.wav" id="6_od3ui"]
 [ext_resource type="AudioStream" uid="uid://b3dojtsud3y3" path="res://Arta/Sunet/Player/jump_3.wav" id="7_00tjw"]
@@ -145,6 +149,12 @@ damping_max = 29.231
 scale_max = 1.5
 color_ramp = SubResource("GradientTexture1D_gwnis")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o28un"]
+streams_count = 3
+stream_0/stream = ExtResource("3_lfmf2")
+stream_1/stream = ExtResource("4_pisgm")
+stream_2/stream = ExtResource("5_b1ygp")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fhl08"]
 random_pitch = 1.3
 streams_count = 5
@@ -177,7 +187,7 @@ position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_bh205")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(3.5, 3.5)
 position_smoothing_enabled = true
 
 [node name="Box_Raycast" type="RayCast2D" parent="."]
@@ -215,7 +225,7 @@ emitting = false
 amount = 10
 sub_emitter = NodePath(".")
 texture = SubResource("GradientTexture2D_fhl08")
-lifetime = 0.54
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_k53q1")
@@ -228,15 +238,27 @@ one_shot = true
 wait_time = 0.3
 autostart = true
 
+[node name="Dead_Audio" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_o28un")
+volume_db = -3.0
+bus = &"Sfx"
+
+[node name="Gravity_Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p5o4e")
+volume_db = -13.118
+bus = &"Sfx"
+
 [node name="Jump_Audio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_fhl08")
 volume_db = -6.934
 max_polyphony = 4
+bus = &"Sfx"
 
 [node name="Walk_Audio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_pisgm")
 volume_db = -6.933
 max_polyphony = 4
+bus = &"Steps"
 
 [connection signal="timeout" from="Death_Timer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="Walk_Audio_Timer" to="." method="_on_walk_audio_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cafrbgq57hyr8"]
+[gd_scene load_steps=11 format=3 uid="uid://cafrbgq57hyr8"]
 
 [ext_resource type="Script" uid="uid://dxvmmy6vpmd4y" path="res://Assets/Scripts/ContinueGame_Door.gd" id="1_7qpao"]
 [ext_resource type="Texture2D" uid="uid://dmode7n8bpsqd" path="res://Arta/Tiles/Transparent/tile_0057.png" id="2_cuvf1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bi55n7oupfool" path="res://Arta/Tiles/Transparent/tile_0058.png" id="4_nml3a"]
 [ext_resource type="Texture2D" uid="uid://875qdx0yhc6n" path="res://Arta/Info Board/Panel.png" id="5_k25o2"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="6_8oxdy"]
+[ext_resource type="AudioStream" uid="uid://0j1r7l30ae0o" path="res://Arta/Sunet/game-start-6104.mp3" id="7_cuvf1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i0g0b"]
 atlas = ExtResource("3_vvtv7")
@@ -101,6 +102,11 @@ theme = ExtResource("6_8oxdy")
 theme_override_font_sizes/font_size = 31
 text = "OK"
 flat = true
+
+[node name="Game_Start_Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_cuvf1")
+volume_db = -5.0
+bus = &"Sfx"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

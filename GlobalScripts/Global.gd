@@ -16,6 +16,14 @@ var default_max_health = 100
 var default_spawn_point = Vector2(0,0)
 var default_spawn_point_gravity : String = 'down'
 
+var world_environment : Environment
+var master_vol : float
+var music_vol : float
+var sfx_vol : float
+var bloom : bool
+var invert_color : bool
+var fullscreen : bool
+
 #----------------------------------------------------------
 
 var levels_visited : Array[String]
@@ -24,12 +32,14 @@ var max_level : String = "Menu"
 var has_save_file : bool = false
 
 func _ready():
+	world_environment = get_tree().get_first_node_in_group("world_environment").environment
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
 	gravity_cooldown.wait_time = 1
 	gravity_cooldown.one_shot = true
 	add_child(gravity_cooldown)
 	load_game()
+	load_settings()
 	pass
 
 func _physics_process(_delta):
@@ -40,13 +50,34 @@ func _physics_process(_delta):
 		max_level = "Menu"
 	if Input.is_action_just_pressed("Reset"):
 		reset_player_to_checkpoint()
+	if Input.is_action_just_pressed("Pause"):
+		load_scene("Menu")
 	if(HEALTH<=0):
 		player_death()
 
+func load_scene(wanted_scene : String, player_to_spawn_point : bool = false):
+	get_tree().get_first_node_in_group("scene_manager").change_level(wanted_scene, player_to_spawn_point)
 func play_transition(string : String):
 	$"/root/SceneManager/TransitionManager".play_transition(string)
 func color_manager_play_transition(string : String):
 	$"/root/SceneManager/ColorManager".play_transition(string)
+
+#----------------------------------------------------------
+#GAME SETTINGS
+func toggle_bloom(value : bool):
+	bloom = value
+	world_environment.glow_enabled = value
+
+func toggle_invert_color(value : bool):
+	invert_color = value
+	get_tree().get_first_node_in_group("invert_color_canvas").visible = value
+
+func toggle_fullscreen(value : bool):
+	fullscreen = value
+	if value:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 #----------------------------------------------------------
 
@@ -64,6 +95,67 @@ func reset_game():
 
 #https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 #look at this if you have problems
+func save_settings():
+	var save_settings_file = FileAccess.open("res://settings.file", FileAccess.WRITE)
+
+	var volume_dic = {
+		"what_is_saved" : "volumes",
+		"master_vol" : master_vol,
+		"music_vol" : music_vol,
+		"sfx_vol" : sfx_vol
+	}
+
+	var video_settings_dic = {
+		"what_is_saved" : "video_settings",
+		"bloom" : bloom,
+		"invert_color" : invert_color,
+		"fullscreen" : fullscreen
+	}
+
+	var volume_info = JSON.stringify(volume_dic)
+	save_settings_file.store_line(volume_info)
+	var video_info = JSON.stringify(video_settings_dic)
+	save_settings_file.store_line(video_info)
+
+	print("Settings Saved")
+
+func load_settings():
+	if not FileAccess.file_exists("res://settings.file"):
+		return #error, file wasn't found
+
+	var save_settings_file = FileAccess.open("res://settings.file", FileAccess.READ)
+
+	#citeste fiecare linie
+	while save_settings_file.get_position() < save_settings_file.get_length():
+		var json_string = save_settings_file.get_line()
+		var json = JSON.new()
+		# Creates the helper class to interact with JSON
+
+		var parse_result = json.parse(json_string)
+		#we parse and verify if it's ok
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		#read that line
+		var node_data = json.get_data()
+
+		#verify what it is
+		match node_data["what_is_saved"]:
+			"volumes":
+				master_vol = node_data["master_vol"]
+				music_vol = node_data["music_vol"]
+				sfx_vol = node_data["sfx_vol"]
+			"video_settings":
+				bloom = node_data["bloom"]
+				toggle_bloom(bloom)
+				invert_color = node_data["invert_color"]
+				toggle_invert_color(invert_color)
+				fullscreen = node_data["fullscreen"]
+				toggle_fullscreen(fullscreen)
+
+		print("Settings Loaded")
+
 func save_game():
 	var save_game_file = FileAccess.open("res://savegame.save", FileAccess.WRITE)
 

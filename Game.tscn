@@ -163,7 +163,7 @@ libraries = {
 }
 script = ExtResource("3_8mv83")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." groups=["world_environment"]]
 environment = SubResource("Environment_ds612")
 
 [node name="Player" parent="." instance=ExtResource("3_3i4ib")]
@@ -229,7 +229,7 @@ script = ExtResource("3_8mv83")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="InvertColor" type="ColorRect" parent="CanvasLayer"]
+[node name="InvertColor" type="ColorRect" parent="CanvasLayer" groups=["invert_color_canvas"]]
 material = SubResource("ShaderMaterial_joorw")
 anchors_preset = 15
 anchor_right = 1.0

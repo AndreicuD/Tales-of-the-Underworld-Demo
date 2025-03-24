@@ -31,7 +31,8 @@ func _on_body_exited(body):
 func _on_button_pressed():
 	PopUp.set_visible(false)
 	Global.reset_game()
-	get_tree().get_first_node_in_group("scene_manager").change_level("Tutorial")
+	Global.load_scene("Tutorial")
+	$Game_Start_Audio.play()
 
 func _on_no_button_pressed():
 	PopUp.set_visible(false)
