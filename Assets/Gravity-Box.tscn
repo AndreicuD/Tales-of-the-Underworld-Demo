@@ -1,12 +1,27 @@
-[gd_scene load_steps=14 format=3 uid="uid://bv2yxfc2ualvp"]
+[gd_scene load_steps=16 format=3 uid="uid://bv2yxfc2ualvp"]
 
 [ext_resource type="Script" uid="uid://cgv7gr0kev3o4" path="res://Assets/Scripts/Custom_Gravity.gd" id="1_g31ov"]
-[ext_resource type="Texture2D" uid="uid://dqobu5uatxav1" path="res://Arta/Tilemap/Individual/046.png" id="2_g31ov"]
+[ext_resource type="Texture2D" uid="uid://btil3d341h5dr" path="res://Arta/Tilemap/Individual/008.png" id="2_sfc32"]
 [ext_resource type="AudioStream" uid="uid://yfh4f3ukwbn" path="res://Arta/Sunet/Box/Box_1.wav" id="3_sfc32"]
 [ext_resource type="AudioStream" uid="uid://cerr8sac14ilx" path="res://Arta/Sunet/Box/Box_2.wav" id="4_m1iv1"]
 [ext_resource type="AudioStream" uid="uid://br6vf2d0miovr" path="res://Arta/Sunet/Box/Box_3.wav" id="5_svkvl"]
 [ext_resource type="AudioStream" uid="uid://w7gvgsqejne5" path="res://Arta/Sunet/Box/Box_4.wav" id="6_qaltl"]
 [ext_resource type="AudioStream" uid="uid://dugl88nyiyi57" path="res://Arta/Sunet/Box/Box_5.wav" id="7_xs8s8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1iv1"]
+atlas = ExtResource("2_sfc32")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svkvl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1iv1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cab4y"]
 size = Vector2(16, 16)
@@ -64,14 +79,15 @@ _data = {
 
 [node name="Gravity_Box" type="RigidBody2D"]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 13
 gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_g31ov")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-texture = ExtResource("2_g31ov")
+[node name="Sprite2D2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_svkvl")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cab4y")

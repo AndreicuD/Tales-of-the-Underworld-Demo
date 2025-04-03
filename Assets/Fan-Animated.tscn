@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvnh6ssjp4g2q"]
+
+[ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_ibpc4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flgf4"]
+atlas = ExtResource("1_ibpc4")
+region = Rect2(112, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jlbk"]
+atlas = ExtResource("1_ibpc4")
+region = Rect2(112, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7uxa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flgf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jlbk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Animated Fan" type="AnimatedSprite2D"]
+modulate = Color(0.67451, 0.67451, 0.67451, 1)
+sprite_frames = SubResource("SpriteFrames_g7uxa")
+autoplay = "default"
+frame_progress = 0.628077

@@ -1,5 +1,7 @@
 extends Node
 
+var PLAYER : CharacterBody2D
+
 var HEALTH = 100
 var MAX_HEALTH = 100
 var CURRENCY : int = 0
@@ -32,6 +34,7 @@ var max_level : String = "Menu"
 var has_save_file : bool = false
 
 func _ready():
+	PLAYER = get_tree().get_first_node_in_group("Player")
 	world_environment = get_tree().get_first_node_in_group("world_environment").environment
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()

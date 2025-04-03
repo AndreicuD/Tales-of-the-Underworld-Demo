@@ -2,8 +2,14 @@ extends RigidBody2D
 
 # Custom gravity scale (if you want to adjust gravity for this specific object)
 var gravity
+@export var can_be_pushed : bool = false
+var player : CharacterBody2D
+
+@export_category("Gravity")
 @export var custom_gravity_scale : float = 0.5
 @export var invert_gravity : bool = false
+
+@export_category("Change Every Second")
 @export var time_change : bool = false
 @export var time : float = 2
 
@@ -11,12 +17,17 @@ var gravity
 @onready var anim = $AnimationPlayer
 
 func _ready():
+	player = Global.PLAYER
 	gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * custom_gravity_scale * (-1 if invert_gravity else 1)
 	timer.wait_time = time
 	if time_change:
 		timer.start()
 
+func is_pushed():
+	global_position.x += player.direction_x
+
 func _physics_process(delta):
+
 	# Get the default gravity from project settings
 	if !time_change:
 		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") * custom_gravity_scale * (-1 if invert_gravity else 1)
@@ -24,7 +35,6 @@ func _physics_process(delta):
 		if timer.time_left < 0.75:
 			anim.play("shake")
 
-	# Apply the gravity manually to the velocity
 	linear_velocity.y += gravity * delta
 
 func _on_timer_timeout():

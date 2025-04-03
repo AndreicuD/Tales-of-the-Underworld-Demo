@@ -30,6 +30,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAASAAIAAAA=")
 tile_set = ExtResource("4_orm1o")
 
 [node name="Estetics_In Front" type="TileMapLayer" parent="Tilemaps"]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
 z_index = 20
 use_parent_material = true
 tile_set = ExtResource("4_orm1o")

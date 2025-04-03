@@ -28,6 +28,7 @@ use_parent_material = true
 tile_set = ExtResource("3_qm8e0")
 
 [node name="Estetics_In Front" type="TileMapLayer" parent="Tilemaps"]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
 z_index = 20
 use_parent_material = true
 tile_set = ExtResource("3_qm8e0")

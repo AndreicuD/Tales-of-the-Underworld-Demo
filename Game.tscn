@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b270mb2r5cgia"]
+[gd_scene load_steps=18 format=3 uid="uid://b270mb2r5cgia"]
 
 [ext_resource type="Script" uid="uid://cqxh8r6w3ii8r" path="res://GlobalScripts/scene_switcher.gd" id="1_75af8"]
 [ext_resource type="AudioStream" uid="uid://m4b7jjlk0b0c" path="res://Arta/Sunet/FIICode-Game.ogg" id="2_3mrqo"]
@@ -125,6 +125,21 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_joorw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [95.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4wr8q"]
 _data = {
 &"Death_Fade_In": SubResource("Animation_ewint"),
@@ -132,7 +147,8 @@ _data = {
 &"Fade_In": SubResource("Animation_8m04h"),
 &"Fade_Out": SubResource("Animation_ga6uh"),
 &"InvertColor_FadeIn": SubResource("Animation_3mrqo"),
-&"InvertColor_FadeOut": SubResource("Animation_2vekm")
+&"InvertColor_FadeOut": SubResource("Animation_2vekm"),
+&"RESET": SubResource("Animation_joorw")
 }
 
 [sub_resource type="Environment" id="Environment_ds612"]

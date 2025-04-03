@@ -1,10 +1,16 @@
 extends CharacterBody2D
 
-var can_move = true
-var is_dead = false
+var can_move : bool = true
+var is_dead : bool = false
+
+var can_push : bool = false
+var pushing : bool = false
+var box : RigidBody2D
 
 var direction_x
+var current_speed : float
 @export var speed = 95.0
+@export var push_speed = 45.0
 @export var jump_power = 225.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -80,6 +86,18 @@ func _on_transition_manager_animation_finished(anim_name):
 		can_move = true
 
 func _physics_process(delta):
+	if can_push && Input.is_action_pressed("Grab_Box"):
+		pushing = true
+		if box:
+			box.is_pushed()
+	else:
+		pushing = false
+
+	if pushing:
+		current_speed = push_speed
+	else:
+		current_speed = speed
+
 	if !death_timer.is_stopped():
 		anim.play("Dead")
 	if is_on_ground():
@@ -92,11 +110,11 @@ func _physics_process(delta):
 	velocity.y += ProjectSettings.get_setting("physics/2d/default_gravity") * delta
 	velocity.y = clamp(velocity.y, -300, 300)
 
-	if Input.is_action_just_pressed("Jump") and is_on_ground() && can_move:
+	if Input.is_action_just_pressed("Jump") and is_on_ground() && can_move  && !pushing:
 		velocity.y -= jump_power
 		jump_audio.play()
 		jump_particles.emitting = true
-	elif Input.is_action_just_pressed("Jump") and !is_on_ground() and !has_changed_gravity and Global.can_change_gravity:
+	elif Input.is_action_just_pressed("Jump") && !is_on_ground() && !has_changed_gravity && Global.can_change_gravity  && !pushing:
 		Global.invert_gravity()
 		gravity_audio.play()
 
@@ -107,7 +125,7 @@ func _physics_process(delta):
 			anim.set_scale(Vector2(-1, 1))
 		elif direction_x>0:
 			anim.set_scale(Vector2(1, 1))
-		velocity.x = direction_x * speed
+		velocity.x = direction_x * current_speed
 		if is_on_ground():
 			anim.play("Running")
 			walk_particles.emitting = true
@@ -116,11 +134,11 @@ func _physics_process(delta):
 			if death_timer.is_stopped():
 				anim.play("Idle")
 			walk_particles.emitting = false
-		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
 
 	move_and_slide()
 
-	if !is_dead && ((box_ray.is_colliding() && is_on_ground()) || (box_ray_down.is_colliding() && is_on_ceiling_custom())):
+	if !is_dead && ((box_ray.is_colliding() && is_on_ground() && !is_gravity_reversed) || (box_ray_down.is_colliding() && is_on_ceiling_custom() && is_gravity_reversed)):
 		die()
 
 	for index in get_slide_collision_count():
@@ -132,3 +150,12 @@ func _physics_process(delta):
 func _on_walk_audio_timer_timeout():
 	if walk_particles.emitting:
 		walk_audio.play()
+
+func _on_box_push_zone_body_entered(body):
+	if body.can_be_pushed:
+		can_push = true
+		box = body
+
+func _on_box_push_zone_body_exited(_body):
+	can_push = false
+	box = null

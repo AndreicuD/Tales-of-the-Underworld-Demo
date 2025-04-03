@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c1mre2qrte5s2"]
+[gd_scene load_steps=40 format=3 uid="uid://c1mre2qrte5s2"]
 
 [ext_resource type="Script" uid="uid://c1qleelweotns" path="res://Player/Player.gd" id="1_bbnet"]
 [ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="2_l3dg1"]
@@ -92,6 +92,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh205"]
 size = Vector2(10, 9)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfmf2"]
+size = Vector2(16, 8)
+
 [sub_resource type="Gradient" id="Gradient_4ntmi"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -176,15 +179,23 @@ stream_4/stream = ExtResource("12_lfmf2")
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 14
 script = ExtResource("1_bbnet")
+push_speed = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_24ksa")
-animation = &"Dead"
+animation = &"Running"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_bh205")
+
+[node name="BoxPushZone" type="Area2D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxPushZone"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_lfmf2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.5, 3.5)
@@ -260,5 +271,7 @@ volume_db = -6.933
 max_polyphony = 4
 bus = &"Steps"
 
+[connection signal="body_entered" from="BoxPushZone" to="." method="_on_box_push_zone_body_entered"]
+[connection signal="body_exited" from="BoxPushZone" to="." method="_on_box_push_zone_body_exited"]
 [connection signal="timeout" from="Death_Timer" to="." method="_on_death_timer_timeout"]
 [connection signal="timeout" from="Walk_Audio_Timer" to="." method="_on_walk_audio_timer_timeout"]

@@ -9,6 +9,9 @@ func deactivate():
 	animatedSprite.play("normal")
 
 func _on_body_entered(_body):
+	if animatedSprite.animation == "normal":
+		$AudioStreamPlayer2D.play()
+
 	for checkpoint in get_tree().get_nodes_in_group("Checkpoint"):
 		checkpoint.deactivate()
 
