@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://deqe6xbj4gvy2"]
+
+[ext_resource type="Texture2D" uid="uid://dp8f3s4a5i5nk" path="res://Arta/Tilemap/platforms.png" id="1_27tra"]
+[ext_resource type="Script" uid="uid://en5muwn3aptk" path="res://Assets/Scripts/moving_platform.gd" id="1_khqr3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khqr3"]
+atlas = ExtResource("1_27tra")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4vx3"]
+atlas = ExtResource("1_27tra")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id2up"]
+atlas = ExtResource("1_27tra")
+region = Rect2(32, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykygk"]
+atlas = ExtResource("1_27tra")
+region = Rect2(32, 16, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kavbk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khqr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4vx3")
+}],
+"loop": true,
+"name": &"2",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id2up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykygk")
+}],
+"loop": true,
+"name": &"3",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjr4a"]
+size = Vector2(48, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ruao"]
+size = Vector2(32, 8)
+
+[node name="Moving Platform" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+platform_floor_layers = 4294967040
+platform_wall_layers = 1
+script = ExtResource("1_khqr3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kavbk")
+animation = &"2"
+
+[node name="3" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_xjr4a")
+disabled = true
+one_way_collision = true
+
+[node name="2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0ruao")
+one_way_collision = true

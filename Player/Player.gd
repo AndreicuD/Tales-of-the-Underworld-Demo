@@ -65,11 +65,16 @@ func add_danger_collision():
 	self.collision_mask |= (1 << 3)
 	self.collision_mask |= (1 << 1)
 
+func remove_noclip_layer_collision():
+	self.collision_mask &= ~(1 << 4)
+func add_noclip_layer_collision():
+	self.collision_mask |= (1 << 4)
+
 func die():
+	is_dead = true
 	Global.play_transition("Death_Fade_In")
 	remove_danger_collision()
 	death_timer.start()
-	is_dead = true
 	can_move = false
 	die_particles.emitting = true
 	anim.play("Dead")
@@ -138,7 +143,13 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	if !is_dead && ((box_ray.is_colliding() && is_on_ground() && !is_gravity_reversed) || (box_ray_down.is_colliding() && is_on_ceiling_custom() && is_gravity_reversed)):
+	var collision_box_up_gravity = 0
+	var collision_box_down_gravity = 0
+	if box_ray.get_collider():
+		collision_box_up_gravity = box_ray.get_collider().gravity
+	if box_ray_down.get_collider():
+		collision_box_down_gravity = box_ray_down.get_collider().gravity
+	if !is_dead && ((box_ray.is_colliding() && is_on_ground() && collision_box_up_gravity == ProjectSettings.get_setting("physics/2d/default_gravity")) || (box_ray_down.is_colliding() && is_on_ceiling_custom() && collision_box_down_gravity == ProjectSettings.get_setting("physics/2d/default_gravity") * -1)):
 		die()
 
 	for index in get_slide_collision_count():

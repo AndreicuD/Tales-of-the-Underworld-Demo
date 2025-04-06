@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="VVVVVV-style"
+config/tags=PackedStringArray("2d", "physics", "tilemap")
 run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
@@ -36,6 +37,7 @@ project/assembly_name="VVVVVV-style"
 Player=""
 Danger=""
 Level=""
+Music_Player=""
 
 [input]
 
@@ -95,6 +97,8 @@ Pause={
 2d_physics/layer_2="Danger"
 2d_physics/layer_3="Level"
 2d_physics/layer_4="Box"
+2d_physics/layer_5="BoxThru"
+2d_physics/layer_6="Noclip"
 
 [rendering]
 

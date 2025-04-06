@@ -18,4 +18,5 @@ func _on_body_entered(_body):
 	animatedSprite.play("activated")
 	Global.set_health(Global.get_max_health())
 	Global.set_spawn_point(self.global_position, self.checkpoint_gravity)
-	Global.can_change_gravity = gravi_boots
+	if !Global.can_change_gravity:
+		Global.can_change_gravity = gravi_boots

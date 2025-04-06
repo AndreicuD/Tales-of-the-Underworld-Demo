@@ -4,6 +4,11 @@ var PLAYER : CharacterBody2D
 
 var HEALTH = 100
 var MAX_HEALTH = 100
+
+#0 - Menu, 1 -underground
+var WORLD : int
+@onready var music_player : AudioStreamPlayer = get_tree().get_first_node_in_group("Music_Player")
+
 var CURRENCY : int = 0
 var CURRENT_LEVEL_CURRENCY : int = 0
 var is_player_dead = false
@@ -64,6 +69,8 @@ func play_transition(string : String):
 	$"/root/SceneManager/TransitionManager".play_transition(string)
 func color_manager_play_transition(string : String):
 	$"/root/SceneManager/ColorManager".play_transition(string)
+func change_music(world : int):
+	music_player.get_stream_playback().switch_to_clip(world)
 
 #----------------------------------------------------------
 #GAME SETTINGS

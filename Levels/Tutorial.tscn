@@ -15,6 +15,7 @@
 
 [node name="Tutorial" type="Node2D" groups=["Level"]]
 script = ExtResource("1_tqhs8")
+world = 1
 gravi_boots = false
 altceva = false
 

@@ -10,6 +10,7 @@
 
 [node name="AfterTutorial" type="Node2D" groups=["Level"]]
 script = ExtResource("1_vflkq")
+world = 1
 gravi_boots = false
 altceva = false
 

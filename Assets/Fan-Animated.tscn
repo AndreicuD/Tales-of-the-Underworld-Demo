@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvnh6ssjp4g2q"]
+[gd_scene load_steps=9 format=3 uid="uid://dvnh6ssjp4g2q"]
 
 [ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_ibpc4"]
+[ext_resource type="Texture2D" uid="uid://c47c28nxd6c0d" path="res://Arta/Tilemap/fan_border.png" id="2_3qnp8"]
+[ext_resource type="AudioStream" uid="uid://b1okem4t0tje1" path="res://Arta/Sunet/mechanical-hum-64405.mp3" id="3_cathc"]
+[ext_resource type="AudioStream" uid="uid://blw0k30orrlnt" path="res://Arta/Sunet/noisy-computer-hum-34737.mp3" id="4_qjpvq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_flgf4"]
 atlas = ExtResource("1_ibpc4")
@@ -24,8 +27,26 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f34xe"]
+random_pitch = 1.04
+random_volume_offset_db = 0.4
+streams_count = 2
+stream_0/stream = ExtResource("3_cathc")
+stream_1/stream = ExtResource("4_qjpvq")
+
 [node name="Animated Fan" type="AnimatedSprite2D"]
 modulate = Color(0.67451, 0.67451, 0.67451, 1)
 sprite_frames = SubResource("SpriteFrames_g7uxa")
 autoplay = "default"
 frame_progress = 0.628077
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3qnp8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_f34xe")
+volume_db = -12.947
+autoplay = true
+max_distance = 1000.0
+attenuation = 2.14355
+bus = &"Sfx"

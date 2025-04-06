@@ -1,12 +1,64 @@
-[gd_scene load_steps=18 format=3 uid="uid://b270mb2r5cgia"]
+[gd_scene load_steps=21 format=3 uid="uid://b270mb2r5cgia"]
 
 [ext_resource type="Script" uid="uid://cqxh8r6w3ii8r" path="res://GlobalScripts/scene_switcher.gd" id="1_75af8"]
-[ext_resource type="AudioStream" uid="uid://m4b7jjlk0b0c" path="res://Arta/Sunet/FIICode-Game.ogg" id="2_3mrqo"]
+[ext_resource type="AudioStream" uid="uid://dxok84gxgngoj" path="res://Arta/Sunet/dark-ambient-music-312290.mp3" id="2_joorw"]
+[ext_resource type="AudioStream" uid="uid://chxancgtplk30" path="res://Arta/Sunet/Underground.mp3" id="3_2vekm"]
 [ext_resource type="PackedScene" uid="uid://c1mre2qrte5s2" path="res://Player/player.tscn" id="3_3i4ib"]
 [ext_resource type="Script" uid="uid://biqk7kx2p7vwk" path="res://GlobalScripts/Transition_Manager.gd" id="3_8mv83"]
+[ext_resource type="AudioStream" uid="uid://cqeiwxmwu0etk" path="res://Arta/Sunet/old-mine-ambience-200677.mp3" id="3_joorw"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="4_2mq4s"]
 [ext_resource type="PackedScene" uid="uid://jlgwph233g4d" path="res://Levels/Menu.tscn" id="4_r0x5m"]
 [ext_resource type="Shader" uid="uid://43vs7xlyybk1" path="res://Assets/Shaders/InvertColor.gdshader" id="6_3mrqo"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_2vekm"]
+clip_count = 3
+clip_0/name = &"Menu"
+clip_0/stream = ExtResource("2_joorw")
+clip_0/auto_advance = 0
+clip_1/name = &"Underground"
+clip_1/stream = ExtResource("3_2vekm")
+clip_1/auto_advance = 0
+clip_2/name = &"UndergroundBonus"
+clip_2/stream = ExtResource("3_2vekm")
+clip_2/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 3.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(0, 0): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 1): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 1): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, 2): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+}
+}
 
 [sub_resource type="Animation" id="Animation_ewint"]
 resource_name = "Death_Fade_In"
@@ -167,10 +219,17 @@ shader = ExtResource("6_3mrqo")
 [node name="SceneManager" type="Node" groups=["scene_manager"]]
 script = ExtResource("1_75af8")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_3mrqo")
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." groups=["Music_Player"]]
+stream = SubResource("AudioStreamInteractive_2vekm")
 autoplay = true
 bus = &"Music"
+
+[node name="Ambience Audio" type="Node" parent="."]
+
+[node name="Mine ambience" type="AudioStreamPlayer" parent="Ambience Audio"]
+stream = ExtResource("3_joorw")
+autoplay = true
+bus = &"Ambience"
 
 [node name="TransitionManager" type="AnimationPlayer" parent="." groups=["screen_animator"]]
 root_node = NodePath("../Fade")
