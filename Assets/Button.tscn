@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcdjl3erkudve"]
 
-[ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_inwvm"]
 [ext_resource type="Script" uid="uid://c1p7kkosw16ku" path="res://Assets/Scripts/button.gd" id="1_xd3af"]
+[ext_resource type="Texture2D" uid="uid://b1fut3k60xj0g" path="res://Arta/Tilemap/Button.png" id="2_xd3af"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xd3af"]
 size = Vector2(48, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xuyln"]
-atlas = ExtResource("1_inwvm")
-region = Rect2(64, 32, 48, 16)
+atlas = ExtResource("2_xd3af")
+region = Rect2(0, 16, 48, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_inwvm"]
-atlas = ExtResource("1_inwvm")
-region = Rect2(64, 32, 48, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8ma4"]
+atlas = ExtResource("2_xd3af")
+region = Rect2(0, 0, 48, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_adl4a"]
 animations = [{
@@ -26,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_inwvm")
+"texture": SubResource("AtlasTexture_w8ma4")
 }],
 "loop": true,
 "name": &"pressed",
@@ -43,6 +43,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_xd3af")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_adl4a")
 animation = &"not_pressed"
 autoplay = "not_pressed"
