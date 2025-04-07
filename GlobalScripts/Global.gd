@@ -25,12 +25,15 @@ var default_spawn_point = Vector2(0,0)
 var default_spawn_point_gravity : String = 'down'
 
 var world_environment : Environment
+var color_shader : Material
 var master_vol : float
 var music_vol : float
 var sfx_vol : float
+var fullscreen : bool
 var bloom : bool
 var invert_color : bool
-var fullscreen : bool
+var contrast : float
+var brightness : float
 
 #----------------------------------------------------------
 
@@ -42,6 +45,8 @@ var has_save_file : bool = false
 func _ready():
 	PLAYER = get_tree().get_first_node_in_group("Player")
 	world_environment = get_tree().get_first_node_in_group("world_environment").environment
+	color_shader = get_tree().get_first_node_in_group("color+contrast_shader").material
+
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
 	gravity_cooldown.wait_time = 1
@@ -69,7 +74,9 @@ func load_scene(wanted_scene : String, player_to_spawn_point : bool = false):
 func play_transition(string : String):
 	$"/root/SceneManager/TransitionManager".play_transition(string)
 func color_manager_play_transition(string : String):
-	$"/root/SceneManager/ColorManager".play_transition(string)
+	if invert_color:
+		$"/root/SceneManager/ColorManager".play_transition(string)
+
 func change_music(world : int):
 	music_player.get_stream_playback().switch_to_clip(world)
 
@@ -80,8 +87,21 @@ func toggle_bloom(value : bool):
 	world_environment.glow_enabled = value
 
 func toggle_invert_color(value : bool):
+	if value == false:
+		color_manager_play_transition("InvertColor_FadeOut")
+	else:
+		invert_color = true
+		color_manager_play_transition("InvertColor_FadeIn")
 	invert_color = value
-	get_tree().get_first_node_in_group("invert_color_canvas").visible = value
+	#get_tree().get_first_node_in_group("invert_color_canvas").visible = value
+
+func change_contrast(value : float):
+	contrast = value
+	color_shader.set_shader_parameter("contrast", value)
+
+func change_brightness(value : float):
+	brightness = value
+	color_shader.set_shader_parameter("brightness", value)
 
 func toggle_fullscreen(value : bool):
 	fullscreen = value
@@ -120,7 +140,9 @@ func save_settings():
 		"what_is_saved" : "video_settings",
 		"bloom" : bloom,
 		"invert_color" : invert_color,
-		"fullscreen" : fullscreen
+		"fullscreen" : fullscreen,
+		"contrast" : contrast,
+		"brightness" : brightness
 	}
 
 	var volume_info = JSON.stringify(volume_dic)
@@ -162,8 +184,13 @@ func load_settings():
 				toggle_bloom(bloom)
 				invert_color = node_data["invert_color"]
 				toggle_invert_color(invert_color)
+				color_manager_play_transition("InvertColor_FadeOut")
 				fullscreen = node_data["fullscreen"]
 				toggle_fullscreen(fullscreen)
+				contrast = node_data["contrast"]
+				change_contrast(contrast)
+				brightness = node_data["brightness"]
+				change_brightness(brightness)
 
 		print("Settings Loaded")
 

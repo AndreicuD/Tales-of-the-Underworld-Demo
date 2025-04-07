@@ -81,41 +81,58 @@ offset_bottom = -86.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("6_5ysvy")
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 30
 text = "Save
 "
 flat = true
 
 [node name="BoxContainer" type="BoxContainer" parent="PopUp"]
 anchors_preset = -1
-anchor_left = 0.194444
-anchor_top = 0.259259
-anchor_right = 0.806424
-anchor_bottom = 0.691358
+anchor_left = 0.194531
+anchor_top = 0.188889
+anchor_right = 0.80625
+anchor_bottom = 0.761111
+offset_left = 95.0
+offset_top = -23.0
+offset_right = -94.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 vertical = true
-metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopUp/BoxContainer"]
+[node name="Sound Settings" type="VBoxContainer" parent="PopUp/BoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Master_Settings" type="GridContainer" parent="PopUp/BoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Sound Settings"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master_Settings" type="GridContainer" parent="PopUp/BoxContainer/Sound Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Master" type="Label" parent="PopUp/BoxContainer/VBoxContainer/Master_Settings"]
+[node name="Master" type="Label" parent="PopUp/BoxContainer/Sound Settings/Master_Settings"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "Master"
 horizontal_alignment = 1
 
-[node name="Master_Slider" type="HSlider" parent="PopUp/BoxContainer/VBoxContainer/Master_Settings"]
+[node name="Master_Slider" type="HSlider" parent="PopUp/BoxContainer/Sound Settings/Master_Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -124,28 +141,28 @@ max_value = 0.7
 step = 0.01
 value = 0.5
 
-[node name="HSeparator" type="HSeparator" parent="PopUp/BoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PopUp/BoxContainer/Sound Settings"]
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_constants/separation = 8
 theme_override_styles/separator = SubResource("StyleBoxLine_oulyn")
 
-[node name="Music_Settings" type="GridContainer" parent="PopUp/BoxContainer/VBoxContainer"]
+[node name="Music_Settings" type="GridContainer" parent="PopUp/BoxContainer/Sound Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Music" type="Label" parent="PopUp/BoxContainer/VBoxContainer/Music_Settings"]
+[node name="Music" type="Label" parent="PopUp/BoxContainer/Sound Settings/Music_Settings"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "Music"
 horizontal_alignment = 1
 
-[node name="Music_Slider" type="HSlider" parent="PopUp/BoxContainer/VBoxContainer/Music_Settings"]
+[node name="Music_Slider" type="HSlider" parent="PopUp/BoxContainer/Sound Settings/Music_Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -154,22 +171,22 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="Sfx_Settings" type="GridContainer" parent="PopUp/BoxContainer/VBoxContainer"]
+[node name="Sfx_Settings" type="GridContainer" parent="PopUp/BoxContainer/Sound Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 columns = 2
 
-[node name="Sfx" type="Label" parent="PopUp/BoxContainer/VBoxContainer/Sfx_Settings"]
+[node name="Sfx" type="Label" parent="PopUp/BoxContainer/Sound Settings/Sfx_Settings"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "Sfx"
 horizontal_alignment = 1
 
-[node name="Sfx_Slider" type="HSlider" parent="PopUp/BoxContainer/VBoxContainer/Sfx_Settings"]
+[node name="Sfx_Slider" type="HSlider" parent="PopUp/BoxContainer/Sound Settings/Sfx_Settings"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -178,59 +195,130 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="Bloom" type="HBoxContainer" parent="PopUp/BoxContainer"]
+[node name="Graphics" type="VBoxContainer" parent="PopUp/BoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-alignment = 1
 
-[node name="Label" type="Label" parent="PopUp/BoxContainer/Bloom"]
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
-text = "Bloom"
+text = "Graphics"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BloomCheck" type="CheckBox" parent="PopUp/BoxContainer/Bloom"]
-layout_mode = 2
-theme = ExtResource("6_5ysvy")
-button_pressed = true
-
-[node name="Invert-Colors" type="HBoxContainer" parent="PopUp/BoxContainer"]
+[node name="Fullscreen" type="HBoxContainer" parent="PopUp/BoxContainer/Graphics"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="PopUp/BoxContainer/Invert-Colors"]
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics/Fullscreen"]
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "Invert Colors Gravi-Boots"
-
-[node name="InvertCheck" type="CheckBox" parent="PopUp/BoxContainer/Invert-Colors"]
-layout_mode = 2
-theme = ExtResource("6_5ysvy")
-button_pressed = true
-
-[node name="Fullscreen" type="HBoxContainer" parent="PopUp/BoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="PopUp/BoxContainer/Fullscreen"]
-layout_mode = 2
-theme = ExtResource("6_5ysvy")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "Fullscreen"
 
-[node name="FullscreenCheck" type="CheckBox" parent="PopUp/BoxContainer/Fullscreen"]
+[node name="FullscreenCheck" type="CheckBox" parent="PopUp/BoxContainer/Graphics/Fullscreen"]
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
+
+[node name="Bloom" type="HBoxContainer" parent="PopUp/BoxContainer/Graphics"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics/Bloom"]
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Bloom"
+
+[node name="BloomCheck" type="CheckBox" parent="PopUp/BoxContainer/Graphics/Bloom"]
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+button_pressed = true
+
+[node name="Invert-Colors" type="HBoxContainer" parent="PopUp/BoxContainer/Graphics"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics/Invert-Colors"]
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Invert Colors with Gravi-Boots"
+
+[node name="InvertCheck" type="CheckBox" parent="PopUp/BoxContainer/Graphics/Invert-Colors"]
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+button_pressed = true
+
+[node name="HSeparator" type="HSeparator" parent="PopUp/BoxContainer/Graphics"]
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_constants/separation = 8
+theme_override_styles/separator = SubResource("StyleBoxLine_oulyn")
+
+[node name="Contrast" type="GridContainer" parent="PopUp/BoxContainer/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Contrast" type="Label" parent="PopUp/BoxContainer/Graphics/Contrast"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Contrast"
+horizontal_alignment = 1
+
+[node name="Contrast_Slider" type="HSlider" parent="PopUp/BoxContainer/Graphics/Contrast"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("6_5ysvy")
+min_value = 0.5
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Brightness" type="GridContainer" parent="PopUp/BoxContainer/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+columns = 2
+
+[node name="Brightness" type="Label" parent="PopUp/BoxContainer/Graphics/Brightness"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme = ExtResource("6_5ysvy")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Brightness"
+horizontal_alignment = 1
+
+[node name="Brightness_Slider" type="HSlider" parent="PopUp/BoxContainer/Graphics/Brightness"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("6_5ysvy")
+min_value = -0.8
+max_value = 0.0
+step = 0.01
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="pressed" from="PopUp/Save Button" to="." method="_on_button_pressed"]
-[connection signal="value_changed" from="PopUp/BoxContainer/VBoxContainer/Master_Settings/Master_Slider" to="." method="_on_master_slider_value_changed"]
-[connection signal="value_changed" from="PopUp/BoxContainer/VBoxContainer/Music_Settings/Music_Slider" to="." method="_on_music_slider_value_changed"]
-[connection signal="value_changed" from="PopUp/BoxContainer/VBoxContainer/Sfx_Settings/Sfx_Slider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="pressed" from="PopUp/BoxContainer/Bloom/BloomCheck" to="." method="_on_bloom_check_pressed"]
-[connection signal="pressed" from="PopUp/BoxContainer/Invert-Colors/InvertCheck" to="." method="_on_invert_check_pressed"]
-[connection signal="pressed" from="PopUp/BoxContainer/Fullscreen/FullscreenCheck" to="." method="_on_fullscreen_check_pressed"]
+[connection signal="value_changed" from="PopUp/BoxContainer/Sound Settings/Master_Settings/Master_Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="PopUp/BoxContainer/Sound Settings/Music_Settings/Music_Slider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="PopUp/BoxContainer/Sound Settings/Sfx_Settings/Sfx_Slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="PopUp/BoxContainer/Graphics/Fullscreen/FullscreenCheck" to="." method="_on_fullscreen_check_pressed"]
+[connection signal="pressed" from="PopUp/BoxContainer/Graphics/Bloom/BloomCheck" to="." method="_on_bloom_check_pressed"]
+[connection signal="toggled" from="PopUp/BoxContainer/Graphics/Invert-Colors/InvertCheck" to="." method="_on_invert_check_toggled"]
+[connection signal="value_changed" from="PopUp/BoxContainer/Graphics/Contrast/Contrast_Slider" to="." method="_on_contrast_slider_value_changed"]
+[connection signal="value_changed" from="PopUp/BoxContainer/Graphics/Brightness/Brightness_Slider" to="." method="_on_brightness_slider_value_changed"]

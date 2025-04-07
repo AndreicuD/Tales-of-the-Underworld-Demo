@@ -6,14 +6,16 @@ var is_active : bool = false
 var player
 var is_opened : bool = false
 
-@onready var master_slider : HSlider = $PopUp/BoxContainer/VBoxContainer/Master_Settings/Master_Slider
-@onready var music_slider : HSlider = $PopUp/BoxContainer/VBoxContainer/Music_Settings/Music_Slider
-@onready var sfx_slider : HSlider = $PopUp/BoxContainer/VBoxContainer/Sfx_Settings/Sfx_Slider
+@onready var master_slider : HSlider = $"PopUp/BoxContainer/Sound Settings/Master_Settings/Master_Slider"
+@onready var music_slider : HSlider = $"PopUp/BoxContainer/Sound Settings/Music_Settings/Music_Slider"
+@onready var sfx_slider : HSlider = $"PopUp/BoxContainer/Sound Settings/Sfx_Settings/Sfx_Slider"
 
-@onready var bloom_check : CheckBox = $PopUp/BoxContainer/Bloom/BloomCheck
-@onready var invert_check : CheckBox = $"PopUp/BoxContainer/Invert-Colors/InvertCheck"
+@onready var fullscreen_check : CheckBox = $PopUp/BoxContainer/Graphics/Fullscreen/FullscreenCheck
+@onready var bloom_check : CheckBox = $PopUp/BoxContainer/Graphics/Bloom/BloomCheck
+@onready var invert_check : CheckBox = $"PopUp/BoxContainer/Graphics/Invert-Colors/InvertCheck"
+@onready var contrast_slider : HSlider = $PopUp/BoxContainer/Graphics/Contrast/Contrast_Slider
+@onready var brightness_slider : HSlider = $PopUp/BoxContainer/Graphics/Brightness/Brightness_Slider
 
-@onready var fullscreen_check : CheckBox = $PopUp/BoxContainer/Fullscreen/FullscreenCheck
 
 func _ready():
 	anim.play("closed_no_key")
@@ -24,6 +26,8 @@ func _ready():
 	bloom_check.button_pressed = Global.bloom
 	invert_check.button_pressed = Global.invert_color
 	fullscreen_check.button_pressed = Global.fullscreen
+	contrast_slider.value = Global.contrast
+	brightness_slider.value = Global.brightness
 
 func _process(_delta):
 	if Input.is_action_just_pressed("Interact") && is_active:
@@ -67,8 +71,14 @@ func _on_master_slider_value_changed(value):
 func _on_bloom_check_pressed():
 	Global.toggle_bloom(bloom_check.button_pressed)
 
-func _on_invert_check_pressed():
-	Global.toggle_invert_color(invert_check.button_pressed)
+func _on_invert_check_toggled(toggled_on):
+	Global.toggle_invert_color(toggled_on)
 
 func _on_fullscreen_check_pressed():
 	Global.toggle_fullscreen(fullscreen_check.button_pressed)
+
+func _on_contrast_slider_value_changed(value):
+	Global.change_contrast(value)
+
+func _on_brightness_slider_value_changed(value):
+	Global.change_brightness(value)

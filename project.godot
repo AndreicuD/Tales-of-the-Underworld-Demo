@@ -38,6 +38,7 @@ Player=""
 Danger=""
 Level=""
 Music_Player=""
+color+contrast_shader=""
 
 [input]
 

@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cqeiwxmwu0etk" path="res://Arta/Sunet/old-mine-ambience-200677.mp3" id="3_joorw"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="4_2mq4s"]
 [ext_resource type="PackedScene" uid="uid://jlgwph233g4d" path="res://Levels/Menu.tscn" id="4_r0x5m"]
-[ext_resource type="Shader" uid="uid://43vs7xlyybk1" path="res://Assets/Shaders/InvertColor.gdshader" id="6_3mrqo"]
+[ext_resource type="Shader" uid="uid://b6q51gtbxwms4" path="res://Assets/Shaders/Contrast.gdshader" id="10_yx171"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_2vekm"]
 clip_count = 3
@@ -151,7 +151,7 @@ length = 0.14
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CanvasLayer/InvertColor:color")
+tracks/0/path = NodePath("../CanvasLayer/Contrast+Invert:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -167,11 +167,11 @@ length = 0.14
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CanvasLayer/InvertColor:color")
+tracks/0/path = NodePath("../CanvasLayer/Contrast+Invert:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.133333),
+"times": PackedFloat32Array(0, 0.133333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -213,8 +213,11 @@ glow_bloom = 0.42
 glow_blend_mode = 1
 adjustment_enabled = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_joorw"]
-shader = ExtResource("6_3mrqo")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhmtn"]
+shader = ExtResource("10_yx171")
+shader_parameter/contrast = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/invert_strength = 0.0
 
 [node name="SceneManager" type="Node" groups=["scene_manager"]]
 script = ExtResource("1_75af8")
@@ -304,8 +307,8 @@ script = ExtResource("3_8mv83")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="InvertColor" type="ColorRect" parent="CanvasLayer" groups=["invert_color_canvas"]]
-material = SubResource("ShaderMaterial_joorw")
+[node name="Contrast+Invert" type="ColorRect" parent="CanvasLayer" groups=["color+contrast_shader"]]
+material = SubResource("ShaderMaterial_yhmtn")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -313,7 +316,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
-metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_finished" from="TransitionManager" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="TransitionManager" to="Player" method="_on_transition_manager_animation_finished"]
