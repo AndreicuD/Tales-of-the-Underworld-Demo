@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7kjn2yrguemn"]
+
+[ext_resource type="Script" uid="uid://cj6m07a3sorr" path="res://Assets/Scripts/physics_door.gd" id="1_bskco"]
+[ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_u8i0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bskco"]
+size = Vector2(48, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bcfv"]
+atlas = ExtResource("1_u8i0d")
+region = Rect2(160, 144, 48, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcb41"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bcfv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Physics Door" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_bskco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_bskco")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(1, 1.33333)
+sprite_frames = SubResource("SpriteFrames_jcb41")

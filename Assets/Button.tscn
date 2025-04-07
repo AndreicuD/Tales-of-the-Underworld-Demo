@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcdjl3erkudve"]
+
+[ext_resource type="Texture2D" uid="uid://xpuvcdoqdsce" path="res://Arta/Tilemap/monochrome_tilemap_transparent_packed.png" id="1_inwvm"]
+[ext_resource type="Script" uid="uid://c1p7kkosw16ku" path="res://Assets/Scripts/button.gd" id="1_xd3af"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xd3af"]
+size = Vector2(48, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuyln"]
+atlas = ExtResource("1_inwvm")
+region = Rect2(64, 32, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inwvm"]
+atlas = ExtResource("1_inwvm")
+region = Rect2(64, 32, 48, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_adl4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuyln")
+}],
+"loop": true,
+"name": &"not_pressed",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inwvm")
+}],
+"loop": true,
+"name": &"pressed",
+"speed": 0.0
+}]
+
+[node name="Button" type="Area2D"]
+collision_layer = 0
+collision_mask = 9
+script = ExtResource("1_xd3af")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_xd3af")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_adl4a")
+animation = &"not_pressed"
+autoplay = "not_pressed"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

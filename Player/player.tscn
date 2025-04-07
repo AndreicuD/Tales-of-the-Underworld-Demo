@@ -177,7 +177,7 @@ stream_3/stream = ExtResource("11_dkpta")
 stream_4/stream = ExtResource("12_lfmf2")
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 30
+collision_mask = 62
 platform_floor_layers = 4294967044
 script = ExtResource("1_bbnet")
 push_speed = 30.0

@@ -17,7 +17,6 @@
 script = ExtResource("1_tqhs8")
 world = 1
 gravi_boots = false
-altceva = false
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

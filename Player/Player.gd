@@ -66,9 +66,11 @@ func add_danger_collision():
 	self.collision_mask |= (1 << 1)
 
 func remove_noclip_layer_collision():
-	self.collision_mask &= ~(1 << 4)
+	print("remove")
+	self.collision_mask &= ~(1 << 5)
 func add_noclip_layer_collision():
-	self.collision_mask |= (1 << 4)
+	print("add")
+	self.collision_mask |= (1 << 5)
 
 func die():
 	is_dead = true

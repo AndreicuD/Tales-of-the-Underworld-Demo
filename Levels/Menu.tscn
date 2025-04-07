@@ -14,7 +14,6 @@
 
 [node name="Menu" type="Node2D" groups=["Level"]]
 script = ExtResource("1_j0r6d")
-altceva = false
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

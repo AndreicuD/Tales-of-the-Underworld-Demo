@@ -15,6 +15,7 @@ var is_player_dead = false
 
 var gravity_cooldown : Timer
 var can_change_gravity : bool = false
+var can_noclip : bool = false
 
 var spawn_point = Vector2(0,0)
 var spawn_point_gravity : String = 'down'
@@ -275,6 +276,14 @@ func get_spawn_point_gravity():
 	return spawn_point_gravity
 
 #----------------------------------------------------------
+
+func set_can_noclip(value : bool):
+	var Player = get_tree().get_first_node_in_group("Player")
+	can_noclip = value
+	if(value):
+		Player.remove_noclip_layer_collision()
+	else:
+		Player.add_noclip_layer_collision()
 
 func set_health(health):
 	HEALTH = health

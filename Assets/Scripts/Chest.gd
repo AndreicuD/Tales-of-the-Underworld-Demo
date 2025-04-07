@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_enum("Gravi-Boots", "Altceva") var item: String = "Gravi-Boots"
+@export_enum("Gravi-Boots", "Quantum Cloak") var item: String = "Gravi-Boots"
 @export var font_size : int = 56
 
 @export var button_text : String = "Nice"
@@ -33,6 +33,8 @@ func _process(_delta):
 
 			if(item == 'Gravi-Boots'):
 				Global.can_change_gravity = true
+			elif(item == 'Quantum Cloak'):
+				Global.set_can_noclip(true)
 	else:
 		ExclMark.set_visible(false)
 		PopUp.set_visible(false)
