@@ -22,4 +22,4 @@ func _on_body_entered(_body):
 	if !Global.can_change_gravity:
 		Global.can_change_gravity = gravi_boots
 	if !Global.can_noclip:
-		Global.can_noclip = noclip
+		Global.set_can_noclip(noclip)

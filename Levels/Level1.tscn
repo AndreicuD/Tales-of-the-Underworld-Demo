@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d3ws02321v1rq"]
+[gd_scene load_steps=14 format=4 uid="uid://d3ws02321v1rq"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_05pb0"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_dl8mf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvnh6ssjp4g2q" path="res://Assets/Fan-Animated.tscn" id="6_05pb0"]
 [ext_resource type="TileSet" uid="uid://cxsvpxro60iml" path="res://Assets/TileSets/Noclip_Walls.tres" id="6_tuji2"]
 [ext_resource type="PackedScene" uid="uid://bv2yxfc2ualvp" path="res://Assets/Gravity-Box.tscn" id="7_dl8mf"]
+[ext_resource type="Script" uid="uid://mb3q7gxyngx5" path="res://Assets/Scripts/noclip_walls.gd" id="7_f5cpa"]
 [ext_resource type="TileSet" uid="uid://di2go724500l3" path="res://Assets/TileSets/BoxThru.tres" id="7_tuji2"]
 [ext_resource type="PackedScene" uid="uid://fuylyq4rf40g" path="res://Assets/Gravity-Box-Big.tscn" id="8_xcayt"]
 [ext_resource type="PackedScene" uid="uid://baokw2tlcqpx1" path="res://Assets/Door.tscn" id="9_5g41i"]
@@ -50,6 +51,7 @@ tile_set = ExtResource("5_7fl83")
 
 [node name="Noclip_Walls" type="TileMapLayer" parent="Tilemaps"]
 tile_set = ExtResource("6_tuji2")
+script = ExtResource("7_f5cpa")
 
 [node name="BoxThru" type="TileMapLayer" parent="Tilemaps"]
 tile_set = ExtResource("7_tuji2")

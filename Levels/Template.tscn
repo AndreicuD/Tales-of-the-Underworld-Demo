@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://cgre32m3ldp2p"]
+[gd_scene load_steps=10 format=4 uid="uid://cgre32m3ldp2p"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_eh3qp"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_s8ran"]
@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://bungt56146ikm" path="res://Assets/TileSets/Controls.tres" id="5_q6bko"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="6_det1o"]
 [ext_resource type="TileSet" uid="uid://cxsvpxro60iml" path="res://Assets/TileSets/Noclip_Walls.tres" id="6_t1k5s"]
+[ext_resource type="Script" uid="uid://mb3q7gxyngx5" path="res://Assets/Scripts/noclip_walls.gd" id="7_50crk"]
 [ext_resource type="TileSet" uid="uid://di2go724500l3" path="res://Assets/TileSets/BoxThru.tres" id="7_t1k5s"]
 
 [node name="Template" type="Node2D" groups=["Level"]]
@@ -43,6 +44,7 @@ tile_set = ExtResource("5_q6bko")
 
 [node name="Noclip_Walls" type="TileMapLayer" parent="Tilemaps"]
 tile_set = ExtResource("6_t1k5s")
+script = ExtResource("7_50crk")
 
 [node name="BoxThru" type="TileMapLayer" parent="Tilemaps"]
 tile_set = ExtResource("7_t1k5s")

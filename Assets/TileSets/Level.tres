@@ -610,6 +610,7 @@ texture = ExtResource("1_huplv")
 8:5/1 = 1
 8:5/1/flip_h = true
 8:5/1/probability = 0.05
+8:5/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 4

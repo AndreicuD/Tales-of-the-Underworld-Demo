@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cun3uli63f2rk"]
+[gd_scene load_steps=21 format=4 uid="uid://cun3uli63f2rk"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_jglcl"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_jglcl"]
@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://cxsvpxro60iml" path="res://Assets/TileSets/Noclip_Walls.tres" id="6_tweqo"]
 [ext_resource type="PackedScene" uid="uid://deqe6xbj4gvy2" path="res://Assets/MovingPlatform.tscn" id="6_x7rwe"]
 [ext_resource type="TileSet" uid="uid://di2go724500l3" path="res://Assets/TileSets/BoxThru.tres" id="7_tweqo"]
+[ext_resource type="Script" uid="uid://mb3q7gxyngx5" path="res://Assets/Scripts/noclip_walls.gd" id="7_v023s"]
 [ext_resource type="PackedScene" uid="uid://bnsro2ic50god" path="res://Assets/Check-Point.tscn" id="8_m3ha0"]
 [ext_resource type="PackedScene" uid="uid://bv2yxfc2ualvp" path="res://Assets/Gravity-Box.tscn" id="8_vd23k"]
 [ext_resource type="PackedScene" uid="uid://dvnh6ssjp4g2q" path="res://Assets/Fan-Animated.tscn" id="8_xosfc"]
@@ -75,7 +76,7 @@ tile_set = ExtResource("3_w0h0a")
 [node name="Estetics_Behind" type="TileMapLayer" parent="Tilemaps"]
 modulate = Color(0.67451, 0.67451, 0.67451, 1)
 use_parent_material = true
-tile_map_data = PackedByteArray("AADj//f/AAAGAAkAAADj//j/AAAFAAoAAADo/wAAAAAEAAkAAADt//j/AAAEAAEAAADv//j/AAAGAAEAAADu//f/AAAFAAAAAADu//b/AAADAAAAAADd/wAAAAAPAAQAAAD4//3/AAAHAA0AAAD4//z/AAAJAAwAAAD5//3/AAAIAAsAAAD6//3/AAAIAAsAAAD7//3/AAAIAA0AAAD8//3/AAAIAAsAAAD9/wAAAAAFAAoAAAD9////AAAFAAkAAAADAP//AAAFAAsAAAADAAAAAAAGAAsAAAAAAAAAAAASAAIAAAD6//7/AAAGAAAAAAD+/wAAAAASAAAAAADs/wAAAAASAAEAAADY/wAAAAARAAAAAADf//j/AAAQAAAAAADi/wkAAAASAAAAAADi//7/AAATAAEAAADi//z/AAATAAAAAADi//3/AAATAAAAAADx//b/AAATAAAAAADx//f/AAATAAEAAAABAAUAAAALAAYAAgACAAUAAAAIAAsAAAADAAUAAAAJAA0AAAD//wcAAAAIAA0AAAAAAAcAAAAIAAsAAAABAAcAAAAJAA0AAAABAAYAAAAHAAwAAAD9//b/AAAGAAkAAQA=")
+tile_map_data = PackedByteArray("AADj//f/AAAGAAkAAADj//j/AAAFAAoAAADo/wAAAAAEAAkAAADt//j/AAAEAAEAAADv//j/AAAGAAEAAADu//f/AAAFAAAAAADu//b/AAADAAAAAADd/wAAAAAPAAQAAAD4//3/AAAHAA0AAAD4//z/AAAJAAwAAAD5//3/AAAIAAsAAAD6//3/AAAIAAsAAAD7//3/AAAIAA0AAAD8//3/AAAIAAsAAAD9/wAAAAAFAAoAAAD9////AAAFAAkAAAADAP//AAAFAAsAAAADAAAAAAAGAAsAAAAAAAAAAAASAAIAAAD6//7/AAAGAAAAAAD+/wAAAAASAAAAAADs/wAAAAASAAEAAADY/wAAAAARAAAAAADf//j/AAAQAAAAAADi/wkAAAASAAAAAADi//7/AAATAAEAAADi//z/AAATAAAAAADi//3/AAATAAAAAADx//b/AAATAAAAAADx//f/AAATAAEAAAABAAUAAAALAAYAAgACAAUAAAAIAAsAAAADAAUAAAAJAA0AAAD//wcAAAAIAA0AAAAAAAcAAAAIAAsAAAABAAcAAAAJAA0AAAABAAYAAAAHAAwAAAD9//b/AAAGAAkAAQDe/wkAAAARAAAAAADX/wkAAAASAAEAAADb/wkAAAAQAAAAAAA=")
 tile_set = ExtResource("4_m3ha0")
 
 [node name="Estetics_In Front" type="TileMapLayer" parent="Tilemaps"]
@@ -92,6 +93,7 @@ tile_set = ExtResource("5_vd23k")
 [node name="Noclip_Walls" type="TileMapLayer" parent="Tilemaps"]
 tile_map_data = PackedByteArray("AADl//n/AAAKAAMAAADl//r/AAAKAAMAAADl//v/AAAKAAMAAADm//n/AAAKAAMAAADm//r/AAAKAAMAAADm//v/AAAKAAMAAAA=")
 tile_set = ExtResource("6_tweqo")
+script = ExtResource("7_v023s")
 
 [node name="BoxThru" type="TileMapLayer" parent="Tilemaps"]
 tile_map_data = PackedByteArray("AADl//n/AAAKAAMAAADl//r/AAAKAAMAAADl//v/AAAKAAMAAADm//n/AAAKAAMAAADm//r/AAAKAAMAAADm//v/AAAKAAMAAAA=")
