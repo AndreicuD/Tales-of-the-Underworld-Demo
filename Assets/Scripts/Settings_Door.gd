@@ -16,6 +16,9 @@ var is_opened : bool = false
 @onready var contrast_slider : HSlider = $PopUp/BoxContainer/Graphics/Contrast/Contrast_Slider
 @onready var brightness_slider : HSlider = $PopUp/BoxContainer/Graphics/Brightness/Brightness_Slider
 
+@onready var vignette_check : CheckBox = $PopUp/BoxContainer/Graphics/Vignette/Check/VignetteCheck
+@onready var vignette_slider : HSlider = $PopUp/BoxContainer/Graphics/Vignette/Vignette_Slider
+
 
 func _ready():
 	anim.play("closed_no_key")
@@ -28,6 +31,8 @@ func _ready():
 	fullscreen_check.button_pressed = Global.fullscreen
 	contrast_slider.value = Global.contrast
 	brightness_slider.value = Global.brightness
+	vignette_check.button_pressed = Global.vignette
+	vignette_slider.value = Global.vignette_val
 
 func _process(_delta):
 	if Input.is_action_just_pressed("Interact") && is_active:
@@ -82,3 +87,9 @@ func _on_contrast_slider_value_changed(value):
 
 func _on_brightness_slider_value_changed(value):
 	Global.change_brightness(value)
+
+func _on_vignette_check_pressed():
+	Global.toggle_vignette(vignette_check.button_pressed)
+
+func _on_vignette_slider_value_changed(value):
+	Global.change_vignette(value)

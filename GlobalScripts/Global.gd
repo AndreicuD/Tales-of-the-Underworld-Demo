@@ -26,6 +26,8 @@ var default_spawn_point_gravity : String = 'down'
 
 var world_environment : Environment
 var color_shader : Material
+var vignette_shader : Material
+var vignette_color_shader : Material
 var master_vol : float
 var music_vol : float
 var sfx_vol : float
@@ -34,6 +36,8 @@ var bloom : bool
 var invert_color : bool
 var contrast : float
 var brightness : float
+var vignette_val : float
+var vignette : bool
 
 #----------------------------------------------------------
 
@@ -46,6 +50,7 @@ func _ready():
 	PLAYER = get_tree().get_first_node_in_group("Player")
 	world_environment = get_tree().get_first_node_in_group("world_environment").environment
 	color_shader = get_tree().get_first_node_in_group("color+contrast_shader").material
+	vignette_shader = get_tree().get_first_node_in_group("vignette_shader").material
 
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
@@ -103,6 +108,15 @@ func change_brightness(value : float):
 	brightness = value
 	color_shader.set_shader_parameter("brightness", value)
 
+func change_vignette(value : float):
+	vignette_val = value
+	vignette_shader.set_shader_parameter("MainAlpha", value)
+
+func toggle_vignette(value : bool):
+	vignette = value
+	#get_tree().get_first_node_in_group("vignette_color_shader").visible = value
+	get_tree().get_first_node_in_group("vignette_shader").visible = value
+
 func toggle_fullscreen(value : bool):
 	fullscreen = value
 	if value:
@@ -142,7 +156,9 @@ func save_settings():
 		"invert_color" : invert_color,
 		"fullscreen" : fullscreen,
 		"contrast" : contrast,
-		"brightness" : brightness
+		"brightness" : brightness,
+		"vignette" : vignette,
+		"vignette_value" : vignette_val
 	}
 
 	var volume_info = JSON.stringify(volume_dic)
@@ -191,6 +207,10 @@ func load_settings():
 				change_contrast(contrast)
 				brightness = node_data["brightness"]
 				change_brightness(brightness)
+				vignette = node_data["vignette"]
+				toggle_vignette(vignette)
+				vignette_val = node_data['vignette_value']
+				change_vignette(vignette_val)
 
 		print("Settings Loaded")
 
