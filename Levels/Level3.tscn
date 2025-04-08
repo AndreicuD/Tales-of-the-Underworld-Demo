@@ -52,7 +52,7 @@ tile_set = ExtResource("4_q5lgr")
 modulate = Color(0.835294, 0.835294, 0.835294, 1)
 z_index = 20
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAFAAwAAAAJAAwAAAD7/wwAAAAJABAAAAD7/w0AAAAJABAAAAD7/w4AAAAJABAAAAD7/w8AAAAJABAAAAD//wwAAAAGAAgAAADz/wIAAAASAAEAAAA=")
+tile_map_data = PackedByteArray("AAAFAAwAAAAJAAwAAAD7/wwAAAAJABAAAAD7/w0AAAAJABAAAAD7/w4AAAAJABAAAAD7/w8AAAAJABAAAAD//wwAAAAGAAgAAADz/wIAAAASAAEAAAAAAPr/AAACAAIAAAA=")
 tile_set = ExtResource("4_q5lgr")
 
 [node name="Controls Grid" type="TileMapLayer" parent="Tilemaps"]

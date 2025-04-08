@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://chxancgtplk30" path="res://Arta/Sunet/Underground.mp3" id="3_2vekm"]
 [ext_resource type="PackedScene" uid="uid://c1mre2qrte5s2" path="res://Player/player.tscn" id="3_3i4ib"]
 [ext_resource type="Script" uid="uid://biqk7kx2p7vwk" path="res://GlobalScripts/Transition_Manager.gd" id="3_8mv83"]
-[ext_resource type="AudioStream" uid="uid://cqeiwxmwu0etk" path="res://Arta/Sunet/old-mine-ambience-200677.mp3" id="3_joorw"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="4_2mq4s"]
+[ext_resource type="AudioStream" uid="uid://iryjs7tleeb3" path="res://Arta/Sunet/dark-horror-ambience-296781.mp3" id="4_2vekm"]
 [ext_resource type="PackedScene" uid="uid://jlgwph233g4d" path="res://Levels/Menu.tscn" id="4_r0x5m"]
 [ext_resource type="Shader" uid="uid://b6q51gtbxwms4" path="res://Assets/Shaders/Contrast.gdshader" id="10_yx171"]
 
@@ -229,8 +229,8 @@ bus = &"Music"
 
 [node name="Ambience Audio" type="Node" parent="."]
 
-[node name="Mine ambience" type="AudioStreamPlayer" parent="Ambience Audio"]
-stream = ExtResource("3_joorw")
+[node name="Ambience" type="AudioStreamPlayer" parent="Ambience Audio"]
+stream = ExtResource("4_2vekm")
 autoplay = true
 bus = &"Ambience"
 
