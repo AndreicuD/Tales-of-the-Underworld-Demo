@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqkdcvcop5k06"]
+[gd_scene load_steps=13 format=3 uid="uid://bqkdcvcop5k06"]
 
 [ext_resource type="Texture2D" uid="uid://b51l63qahh8xq" path="res://Arta/Tiles/Transparent/tile_0002.png" id="1_rss4a"]
 [ext_resource type="Script" uid="uid://crw7loc7otg8u" path="res://Assets/Scripts/Coin.gd" id="2_sknaa"]
@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejw76"]
 size = Vector2(14, 14)
 
-[sub_resource type="Animation" id="Animation_1hasy"]
+[sub_resource type="Animation" id="Animation_c6que"]
 resource_name = "default"
 length = 2.0
 loop_mode = 1
@@ -23,14 +23,30 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
-"transitions": PackedFloat32Array(1, 1.62451, 1, 2.2974, 1),
+"transitions": PackedFloat32Array(1, 1.51572, 1, 1.41421, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_377m4"]
+[sub_resource type="Animation" id="Animation_hoe1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16v10"]
 _data = {
-&"default": SubResource("Animation_1hasy")
+&"RESET": SubResource("Animation_hoe1y"),
+&"default": SubResource("Animation_c6que")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wm4ua"]
@@ -53,9 +69,8 @@ shape = SubResource("RectangleShape2D_ejw76")
 texture = ExtResource("1_rss4a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CoinSprite"]
-reset_on_save = false
 libraries = {
-&"": SubResource("AnimationLibrary_377m4")
+&"": SubResource("AnimationLibrary_16v10")
 }
 autoplay = "default"
 

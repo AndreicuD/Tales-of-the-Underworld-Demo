@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1um36rdrb485"]
+
+[ext_resource type="PackedScene" uid="uid://bcdjl3erkudve" path="res://Assets/Button.tscn" id="1_5867f"]
+[ext_resource type="Script" uid="uid://1e5xmcfx8kym" path="res://Assets/Scripts/double_button.gd" id="2_3hp1e"]
+
+[node name="Double Button" instance=ExtResource("1_5867f")]
+script = ExtResource("2_3hp1e")

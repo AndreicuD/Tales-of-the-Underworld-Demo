@@ -315,22 +315,14 @@ step = 0.01
 layout_mode = 2
 alignment = 1
 
-[node name="Check" type="HBoxContainer" parent="PopUp/BoxContainer/Graphics/Vignette"]
+[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics/Vignette"]
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="PopUp/BoxContainer/Graphics/Vignette/Check"]
 layout_mode = 2
 theme = ExtResource("6_5ysvy")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "Vignette"
-
-[node name="VignetteCheck" type="CheckBox" parent="PopUp/BoxContainer/Graphics/Vignette/Check"]
-layout_mode = 2
-theme = ExtResource("6_5ysvy")
-button_pressed = true
+horizontal_alignment = 1
 
 [node name="Vignette_Slider" type="HSlider" parent="PopUp/BoxContainer/Graphics/Vignette"]
 layout_mode = 2
@@ -352,5 +344,4 @@ value = 0.5
 [connection signal="toggled" from="PopUp/BoxContainer/Graphics/Invert-Colors/InvertCheck" to="." method="_on_invert_check_toggled"]
 [connection signal="value_changed" from="PopUp/BoxContainer/Graphics/Contrast/Contrast_Slider" to="." method="_on_contrast_slider_value_changed"]
 [connection signal="value_changed" from="PopUp/BoxContainer/Graphics/Brightness/Brightness_Slider" to="." method="_on_brightness_slider_value_changed"]
-[connection signal="pressed" from="PopUp/BoxContainer/Graphics/Vignette/Check/VignetteCheck" to="." method="_on_vignette_check_pressed"]
 [connection signal="value_changed" from="PopUp/BoxContainer/Graphics/Vignette/Vignette_Slider" to="." method="_on_vignette_slider_value_changed"]

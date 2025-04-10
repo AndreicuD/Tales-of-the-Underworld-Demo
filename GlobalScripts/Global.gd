@@ -1,5 +1,6 @@
 extends Node
 
+#used by other scripts (like the box script)
 var PLAYER : CharacterBody2D
 
 var HEALTH = 100
@@ -24,10 +25,9 @@ var default_max_health = 100
 var default_spawn_point = Vector2(0,0)
 var default_spawn_point_gravity : String = 'down'
 
-var world_environment : Environment
-var color_shader : Material
-var vignette_shader : Material
-var vignette_color_shader : Material
+@onready var world_environment : Environment = get_tree().get_first_node_in_group("world_environment").environment
+@onready var color_shader : Material = get_tree().get_first_node_in_group("color+contrast_shader").material
+@onready var vignette_shader : Material = get_tree().get_first_node_in_group("vignette_shader").material
 var master_vol : float
 var music_vol : float
 var sfx_vol : float
@@ -36,8 +36,7 @@ var bloom : bool
 var invert_color : bool
 var contrast : float
 var brightness : float
-var vignette_val : float
-var vignette : bool
+var vignette : float
 
 #----------------------------------------------------------
 
@@ -45,13 +44,11 @@ var levels_visited : Array[String]
 var current_level : String = "Start"
 var max_level : String = "Menu"
 var has_save_file : bool = false
+var gravity_when_save : bool = false
+var noclip_when_save : bool = false
 
 func _ready():
 	PLAYER = get_tree().get_first_node_in_group("Player")
-	world_environment = get_tree().get_first_node_in_group("world_environment").environment
-	color_shader = get_tree().get_first_node_in_group("color+contrast_shader").material
-	vignette_shader = get_tree().get_first_node_in_group("vignette_shader").material
-
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
 	gravity_cooldown.wait_time = 1
@@ -109,13 +106,8 @@ func change_brightness(value : float):
 	color_shader.set_shader_parameter("brightness", value)
 
 func change_vignette(value : float):
-	vignette_val = value
-	vignette_shader.set_shader_parameter("MainAlpha", value)
-
-func toggle_vignette(value : bool):
 	vignette = value
-	#get_tree().get_first_node_in_group("vignette_color_shader").visible = value
-	get_tree().get_first_node_in_group("vignette_shader").visible = value
+	vignette_shader.set_shader_parameter("MainAlpha", value)
 
 func toggle_fullscreen(value : bool):
 	fullscreen = value
@@ -157,8 +149,7 @@ func save_settings():
 		"fullscreen" : fullscreen,
 		"contrast" : contrast,
 		"brightness" : brightness,
-		"vignette" : vignette,
-		"vignette_value" : vignette_val
+		"vignette" : vignette
 	}
 
 	var volume_info = JSON.stringify(volume_dic)
@@ -208,9 +199,7 @@ func load_settings():
 				brightness = node_data["brightness"]
 				change_brightness(brightness)
 				vignette = node_data["vignette"]
-				toggle_vignette(vignette)
-				vignette_val = node_data['vignette_value']
-				change_vignette(vignette_val)
+				change_vignette(vignette)
 
 		print("Settings Loaded")
 
@@ -231,6 +220,8 @@ func save_game():
 		"what_is_saved" : "spawn_point",
 		"position" : var_to_str(get_spawn_point()),
 		"gravity" : get_spawn_point_gravity(),
+		"gravity_when_saved" : gravity_when_save,
+		"noclip_when_saved" : noclip_when_save
 	}
 
 	var currency_info = JSON.stringify(currency_dic)

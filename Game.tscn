@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b270mb2r5cgia"]
+[gd_scene load_steps=23 format=3 uid="uid://b270mb2r5cgia"]
 
 [ext_resource type="Script" uid="uid://cqxh8r6w3ii8r" path="res://GlobalScripts/scene_switcher.gd" id="1_75af8"]
 [ext_resource type="AudioStream" uid="uid://dxok84gxgngoj" path="res://Arta/Sunet/dark-ambient-music-312290.mp3" id="2_joorw"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://jlgwph233g4d" path="res://Levels/Menu.tscn" id="4_r0x5m"]
 [ext_resource type="Shader" uid="uid://b3dt8qteb0773" path="res://Assets/Shaders/Vignette.gdshader" id="9_yx171"]
 [ext_resource type="Shader" uid="uid://b6q51gtbxwms4" path="res://Assets/Shaders/Contrast.gdshader" id="10_yx171"]
-[ext_resource type="Shader" uid="uid://kj4hd8ohv53k" path="res://Assets/Shaders/Vignette_Color.gdshader" id="11_yhmtn"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_2vekm"]
 clip_count = 3
@@ -221,19 +220,11 @@ shader_parameter/contrast = 1.0
 shader_parameter/brightness = 0.0
 shader_parameter/invert_strength = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwjdr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yx171"]
 shader = ExtResource("9_yx171")
-shader_parameter/outerRadius = 2.489
-shader_parameter/MainAlpha = 0.5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lvtmh"]
-shader = ExtResource("11_yhmtn")
-shader_parameter/r_displacement = Vector2(3, 0)
-shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(-3, 0)
-shader_parameter/height = 0.7
-shader_parameter/width = 0.5
-shader_parameter/fade = 0.7
+shader_parameter/outerRadius = 1.751
+shader_parameter/MainAlpha = 1.0
+shader_parameter/feathering = 0.516
 
 [node name="SceneManager" type="Node" groups=["scene_manager"]]
 script = ExtResource("1_75af8")
@@ -334,17 +325,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer" groups=["vignette_shader"]]
-material = SubResource("ShaderMaterial_gwjdr")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Vignette_Color" type="ColorRect" parent="CanvasLayer" groups=["vignette_color_shader"]]
-visible = false
-material = SubResource("ShaderMaterial_lvtmh")
+material = SubResource("ShaderMaterial_yx171")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
