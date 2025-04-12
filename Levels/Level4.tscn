@@ -82,6 +82,7 @@ position = Vector2(320, -208)
 
 [node name="CheckPoint" parent="Tilemaps" instance=ExtResource("16_xrw8b")]
 position = Vector2(240, -200)
+noclip = false
 
 [node name="Attack_Boxes" type="Node2D" parent="."]
 
@@ -149,6 +150,7 @@ position = Vector2(-168, -80)
 position = Vector2(-168, -232)
 rotation = -3.14159
 checkpoint_gravity = "up"
+noclip = false
 
 [node name="Up_Zone" type="Node2D" parent="."]
 
