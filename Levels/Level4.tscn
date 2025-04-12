@@ -139,10 +139,6 @@ open_direction = 1
 position = Vector2(48, 8)
 can_be_pushed = true
 
-[node name="Custom Platform" parent="Start_Zone" instance=ExtResource("12_jld50")]
-position = Vector2(168, -88)
-platform_size = 2
-
 [node name="Key" parent="Start_Zone" instance=ExtResource("13_svocn")]
 position = Vector2(176, -64)
 
@@ -223,7 +219,7 @@ vertical = true
 
 [node name="Door" parent="." instance=ExtResource("14_7csao")]
 position = Vector2(-40, -104)
-wanted_level = "Level5"
+wanted_level = "End"
 needs_key = true
 
 [node name="Coin" parent="." instance=ExtResource("19_3k6h0")]
@@ -299,7 +295,8 @@ invert_gravity = true
 horizontal_gravity = true
 
 [node name="Custom Platform" parent="." instance=ExtResource("12_jld50")]
-position = Vector2(128, -88)
+position = Vector2(136, -88)
+platform_size = 2
 
 [node name="Collectible" parent="." instance=ExtResource("20_0g065")]
 position = Vector2(128, -72)

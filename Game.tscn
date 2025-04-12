@@ -37,25 +37,25 @@ Vector2i(0, 0): {
 },
 Vector2i(1, 1): {
 "fade_beats": 1.0,
-"fade_mode": 3,
+"fade_mode": 0,
 "from_time": 0,
 "to_time": 0
 },
 Vector2i(1, 2): {
 "fade_beats": 1.0,
-"fade_mode": 3,
+"fade_mode": 4,
 "from_time": 0,
 "to_time": 0
 },
 Vector2i(2, 1): {
 "fade_beats": 1.0,
-"fade_mode": 3,
+"fade_mode": 4,
 "from_time": 0,
 "to_time": 0
 },
 Vector2i(2, 2): {
 "fade_beats": 1.0,
-"fade_mode": 3,
+"fade_mode": 0,
 "from_time": 0,
 "to_time": 0
 }

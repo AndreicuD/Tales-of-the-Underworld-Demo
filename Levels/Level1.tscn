@@ -81,11 +81,11 @@ wanted_level = "Level2"
 offset_left = -72.0
 offset_top = 96.0
 offset_right = 115.0
-offset_bottom = 180.0
+offset_bottom = 151.0
 scale = Vector2(0.3, 0.3)
 theme = ExtResource("12_tuji2")
 theme_override_font_sizes/font_size = 20
-text = "You can also drag boxes around!"
+text = "Drag the boxes around!"
 horizontal_alignment = 1
 autowrap_mode = 2
 

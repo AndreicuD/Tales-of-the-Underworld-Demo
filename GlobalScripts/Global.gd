@@ -57,6 +57,7 @@ func _ready():
 	add_child(gravity_cooldown)
 	load_game()
 	load_settings()
+	#load_scene("Tutorial")
 	pass
 
 func _physics_process(_delta):
