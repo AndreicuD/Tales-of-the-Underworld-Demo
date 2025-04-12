@@ -6,13 +6,11 @@ var is_active : bool = false
 var player
 var is_opened : bool = false
 
-func _ready():
+func _process(_delta):
 	if !Global.has_save_file:
 		anim.play("closed_key")
 	else:
 		anim.play("closed_no_key")
-
-func _process(_delta):
 	if Input.is_action_just_pressed("Interact") && is_active:
 		if !is_opened:
 			if !Global.has_save_file:
