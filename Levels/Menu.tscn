@@ -39,14 +39,14 @@ tile_map_data = PackedByteArray("AAD/////AAAhAAQAAAAAAP//AAAfAAQAAAD///7/AAAEAAI
 tile_set = ExtResource("4_wilrv")
 
 [node name="Title" type="Label" parent="."]
-offset_left = -48.0
+offset_left = -88.0
 offset_top = -32.0
-offset_right = 283.0
+offset_right = 523.0
 offset_bottom = 19.0
 scale = Vector2(0.3, 0.3)
 theme = ExtResource("7_jkmg0")
-theme_override_font_sizes/font_size = 40
-text = "FiiCode Game!"
+theme_override_font_sizes/font_size = 30
+text = "Tales of the Underworld"
 horizontal_alignment = 1
 
 [node name="New Game Label" type="Label" parent="."]
