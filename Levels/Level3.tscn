@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://0nhpo5aq7p7c"]
+[gd_scene load_steps=23 format=4 uid="uid://0nhpo5aq7p7c"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_vybwq"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_4cgce"]
@@ -21,10 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://deqe6xbj4gvy2" path="res://Assets/Custom Platform.tscn" id="18_xc3xs"]
 [ext_resource type="PackedScene" uid="uid://bm54m62iyqe5r" path="res://Assets/Key.tscn" id="20_4hxla"]
 [ext_resource type="PackedScene" uid="uid://baokw2tlcqpx1" path="res://Assets/Door.tscn" id="21_suhnr"]
+[ext_resource type="PackedScene" uid="uid://cijuon2dnkqli" path="res://Assets/Collectible.tscn" id="22_gej81"]
 
 [node name="Level3" type="Node2D" groups=["Level"]]
 script = ExtResource("1_vybwq")
 world = 1
+noclip = false
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -52,7 +54,7 @@ tile_set = ExtResource("4_q5lgr")
 modulate = Color(0.835294, 0.835294, 0.835294, 1)
 z_index = 20
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAFAAwAAAAJAAwAAAD7/wwAAAAJABAAAAD7/w0AAAAJABAAAAD7/w4AAAAJABAAAAD7/w8AAAAJABAAAAD//wwAAAAGAAgAAADz/wIAAAASAAEAAAAAAPr/AAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAAFAAwAAAAJAAwAAAD7/wwAAAAJABAAAAD7/w0AAAAJABAAAAD7/w4AAAAJABAAAAD7/w8AAAAJABAAAAD//wwAAAAGAAgAAADz/wIAAAASAAEAAAA=")
 tile_set = ExtResource("4_q5lgr")
 
 [node name="Controls Grid" type="TileMapLayer" parent="Tilemaps"]
@@ -102,7 +104,7 @@ position = Vector2(-368, 0)
 position = Vector2(-336, 0)
 
 [node name="Gravity_Box" parent="." instance=ExtResource("10_hy5j1")]
-position = Vector2(80, 8)
+position = Vector2(128, 8)
 can_be_pushed = true
 
 [node name="Button" parent="." node_paths=PackedStringArray("connect_to") instance=ExtResource("11_xxxi4")]
@@ -115,7 +117,7 @@ position = Vector2(200, 40)
 open_direction = 1
 
 [node name="Info_Board" parent="." instance=ExtResource("13_3e7p2")]
-position = Vector2(128, 8)
+position = Vector2(80, 8)
 text = "You can open doors with these big buttons too. Try it!"
 font_size = 50
 
@@ -163,7 +165,7 @@ position = Vector2(-360, 120)
 
 [node name="Door" parent="." instance=ExtResource("21_suhnr")]
 position = Vector2(-248, 40)
-wanted_level = "Level4"
+wanted_level = "Level3to4"
 needs_key = true
 
 [node name="Coin4" parent="." instance=ExtResource("14_hx0pg")]
@@ -177,3 +179,7 @@ position = Vector2(-360, 136)
 
 [node name="Coin7" parent="." instance=ExtResource("14_hx0pg")]
 position = Vector2(-376, 120)
+
+[node name="Collectible" parent="." instance=ExtResource("22_gej81")]
+position = Vector2(8, -88)
+level = "Level3"

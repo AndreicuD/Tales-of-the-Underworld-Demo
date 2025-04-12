@@ -41,6 +41,7 @@ var vignette : float
 #----------------------------------------------------------
 
 var levels_visited : Array[String]
+var collectibles_got : Array[String]
 var current_level : String = "Start"
 var max_level : String = "Menu"
 var has_save_file : bool = false
@@ -126,6 +127,7 @@ func reset_game():
 	HEALTH = default_max_health
 
 	levels_visited = []
+	collectibles_got = []
 
 	spawn_point = default_spawn_point
 	spawn_point_gravity = default_spawn_point_gravity
@@ -212,8 +214,9 @@ func save_game():
 	}
 
 	var level_dic = {
-		"what_is_saved" : "levels_visited",
-		"levels" : levels_visited
+		"what_is_saved" : "level_info",
+		"levels" : levels_visited,
+		"collectibles" : collectibles_got
 	}
 
 	var spawn_point_dic = {
@@ -262,9 +265,11 @@ func load_game():
 			"currency":
 				set_currency(node_data['amount'])
 				CURRENT_LEVEL_CURRENCY = 0
-			"levels_visited":
+			"level_info":
 				for level in node_data['levels']:
 					levels_visited.push_back(level)
+				for collectible in node_data['collectibles']:
+					collectibles_got.push_back(collectible)
 
 	print("Game Loaded")
 

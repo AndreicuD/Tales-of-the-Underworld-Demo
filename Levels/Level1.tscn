@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://d3ws02321v1rq"]
+[gd_scene load_steps=16 format=4 uid="uid://d3ws02321v1rq"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_05pb0"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_dl8mf"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://baokw2tlcqpx1" path="res://Assets/Door.tscn" id="9_5g41i"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="12_tuji2"]
 [ext_resource type="PackedScene" uid="uid://deqe6xbj4gvy2" path="res://Assets/Custom Platform.tscn" id="14_104vp"]
+[ext_resource type="PackedScene" uid="uid://cijuon2dnkqli" path="res://Assets/Collectible.tscn" id="15_3momc"]
 
 [node name="Level1" type="Node2D" groups=["Level"]]
 script = ExtResource("1_05pb0")
@@ -41,7 +42,7 @@ tile_set = ExtResource("4_5g41i")
 modulate = Color(0.834613, 0.834615, 0.834614, 1)
 z_index = 20
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD8//7/AAAGAAAAAAAOAAcAAAAMAAQAAAATAAYAAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAD8//7/AAAGAAAAAAAOAAcAAAAMAAQAAAA=")
 tile_set = ExtResource("4_5g41i")
 
 [node name="Controls Grid" type="TileMapLayer" parent="Tilemaps"]
@@ -99,3 +100,7 @@ platform_size = 0
 [node name="Custom Platform3" parent="." instance=ExtResource("14_104vp")]
 position = Vector2(200, 56)
 platform_size = 0
+
+[node name="Collectible" parent="." instance=ExtResource("15_3momc")]
+position = Vector2(312, 104)
+level = "Level1"

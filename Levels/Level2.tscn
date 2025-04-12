@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cun3uli63f2rk"]
+[gd_scene load_steps=22 format=4 uid="uid://cun3uli63f2rk"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_jglcl"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_jglcl"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bfvaxbtk0lhl6" path="res://Assets/Chest.tscn" id="12_80cou"]
 [ext_resource type="PackedScene" uid="uid://baokw2tlcqpx1" path="res://Assets/Door.tscn" id="14_mbiy8"]
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="16_mbwna"]
+[ext_resource type="PackedScene" uid="uid://cijuon2dnkqli" path="res://Assets/Collectible.tscn" id="18_biamp"]
 
 [sub_resource type="Animation" id="Animation_lf2mf"]
 length = 0.001
@@ -83,7 +84,7 @@ tile_set = ExtResource("4_m3ha0")
 modulate = Color(0.835294, 0.835294, 0.835294, 1)
 z_index = 20
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAFAPb/AAACAAIAAADe/wMAAAAJABAAAQDd/wMAAAAJABAAAQDc/wMAAAAJABAAAQA=")
+tile_map_data = PackedByteArray("AADe/wMAAAAJABAAAQDd/wMAAAAJABAAAQDc/wMAAAAJABAAAQA=")
 tile_set = ExtResource("4_m3ha0")
 
 [node name="Controls Grid" type="TileMapLayer" parent="Tilemaps"]
@@ -268,3 +269,7 @@ autowrap_mode = 2
 [node name="Info_Board2" parent="." instance=ExtResource("3_euvw0")]
 position = Vector2(-504, 152)
 text = "Make sure you grab the checkpoint before you go!"
+
+[node name="Collectible" parent="." instance=ExtResource("18_biamp")]
+position = Vector2(88, -152)
+level = "Level2"
