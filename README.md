@@ -7,6 +7,7 @@ Navigate through logic-driven levels using moving platforms, buttons, doors, and
 ## How to run the demo:
 
 You can either get it through it's [itch page](https://andreicud.itch.io/tales-of-the-underworld) or just download the project and find the executable in the "Tales of the Underworld" folder.
+You can find the presentation video also on [Youtube](https://www.youtube.com/watch?v=1t3_AdtTGp4).
 
 ## 🕹️ Core Mechanics
 
