@@ -67,7 +67,13 @@ func _physics_process(_delta):
 	else:
 		max_level = "Menu"
 	if Input.is_action_just_pressed("Reset"):
-		reset_player_to_checkpoint()
+		if current_level != 'Menu' && current_level != 'Start':
+			reset_player_to_checkpoint()
+		else:
+			var Player = get_tree().get_first_node_in_group("Player")
+			Player.position = Vector2(0, 0)
+			force_gravity_down()
+
 	if Input.is_action_just_pressed("Pause"):
 		load_scene("Menu")
 	if(HEALTH<=0):

@@ -31,6 +31,7 @@ func _on_body_exited(body):
 func _on_button_pressed():
 	PopUp.set_visible(false)
 	Global.reset_game()
+	Global.has_save_file = true
 	Global.load_scene("Tutorial")
 	$Game_Start_Audio.play()
 

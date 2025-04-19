@@ -1,2 +1,2 @@
-{"master_vol":0.33,"music_vol":0.0,"sfx_vol":0.65,"what_is_saved":"volumes"}
-{"bloom":false,"brightness":0.0,"contrast":0.99,"fullscreen":true,"invert_color":false,"vignette":0.0,"what_is_saved":"video_settings"}
+{"master_vol":0.33,"music_vol":0.22,"sfx_vol":0.65,"what_is_saved":"volumes"}
+{"bloom":true,"brightness":0.0,"contrast":0.99,"fullscreen":true,"invert_color":true,"vignette":0.5,"what_is_saved":"video_settings"}
