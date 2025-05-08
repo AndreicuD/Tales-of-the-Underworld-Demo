@@ -1,13 +1,13 @@
 # <p align="center">Tales of the Underworld - What if up wasn’t up?</p>
 
-<b>A minimalist 2D physics-based platformer</b> built around puzzle-solving and a short narrative. You play in a world of black, white, and gray — a visual style that keeps essentials clear while keeping the vibe. Use the <b>*Quantum Clock*</b> to phase through select walls and the <b>*Gravi-Boots*</b> to flip gravity on command. 
+<b>A minimalist 2D physics-based platformer</b> built around puzzle-solving and a short narrative. You play in a world of black, white, and gray — a visual style that keeps essentials clear while keeping the vibe. Use the <b>*Quantum Cloak*</b> to phase through select walls and the <b>*Gravi-Boots*</b> to flip gravity on command. 
 
 Navigate through logic-driven levels using moving platforms, buttons, doors, and interactive boxes that respond to both physics and gravity. A checkpoint-based save/load system supports thoughtful exploration, while optional coins and collectibles offer a challenge for completionists. Every level is a puzzle — every mechanic is a key.
 
 ## How to run the demo:
 
 You can either get it through it's [itch page](https://andreicud.itch.io/tales-of-the-underworld) or just download the project and find the executable in the "Tales of the Underworld" folder.
-You can find the presentation video also on [Youtube](https://www.youtube.com/watch?v=1t3_AdtTGp4).
+You can find the presentation video on [Youtube](https://www.youtube.com/watch?v=1t3_AdtTGp4).
 
 ## 🕹️ Core Mechanics
 
