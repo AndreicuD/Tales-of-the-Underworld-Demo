@@ -70,7 +70,7 @@ var key_pieces = {
 }
 
 func _process(_delta):
-	if has_key_piece("key_piece_1") && has_key_piece("key_piece_2") && has_key_piece("key_piece_3"):
+	if has_key_piece("key_piece_1") && has_key_piece("key_piece_2") && has_key_piece("key_piece_4"):
 		get_tree().get_first_node_in_group("boschete").global_position = Vector2(200, -8)
 
 # Get information about an NPC's reaction based on quest status

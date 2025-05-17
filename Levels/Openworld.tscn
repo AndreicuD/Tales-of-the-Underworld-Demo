@@ -296,7 +296,7 @@ position = Vector2(1960, -576)
 quest = "find_child"
 
 [node name="Core Fragment" parent="." instance=ExtResource("20_u4qhi")]
-position = Vector2(-232, -208)
+position = Vector2(-232, -200)
 text = "Woah, what is this!?"
 
 [node name="NPC" parent="." instance=ExtResource("18_lekrq")]
