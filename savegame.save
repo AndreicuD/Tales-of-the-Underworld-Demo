@@ -1,0 +1,3 @@
+{"amount":19,"what_is_saved":"currency"}
+{"collectibles":["Level1"],"levels":["Tutorial","AfterTutorial","Level1","Level2","Openworld"],"what_is_saved":"level_info"}
+{"gravity":"down","gravity_when_saved":false,"noclip_when_saved":false,"position":"Vector2(1126, -840)","what_is_saved":"spawn_point"}

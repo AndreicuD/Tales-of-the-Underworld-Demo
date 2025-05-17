@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://jlgwph233g4d"]
+[gd_scene load_steps=12 format=4 uid="uid://jlgwph233g4d"]
 
 [ext_resource type="Script" uid="uid://cv1qyn341vvi7" path="res://Levels/level_script.gd" id="1_j0r6d"]
 [ext_resource type="TileSet" uid="uid://dimsptqgevue" path="res://Assets/TileSets/Level.tres" id="2_1pg2v"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="7_jkmg0"]
 [ext_resource type="PackedScene" uid="uid://b8ls5tnhfvtkc" path="res://Assets/Settings-Door.tscn" id="8_k1aj7"]
 [ext_resource type="PackedScene" uid="uid://dt3lqotk6oen5" path="res://Assets/Info-Board.tscn" id="9_j0r6d"]
+[ext_resource type="PackedScene" uid="uid://baokw2tlcqpx1" path="res://Assets/Door.tscn" id="11_qm8e0"]
 
 [node name="Menu" type="Node2D" groups=["Level"]]
 script = ExtResource("1_j0r6d")
@@ -110,3 +111,7 @@ rotation = 3.14159
 [node name="Info_Board" parent="." instance=ExtResource("9_j0r6d")]
 position = Vector2(0, 72)
 text = "You can change the gravity by pressing JUMP while in air!"
+
+[node name="Door" parent="." instance=ExtResource("11_qm8e0")]
+position = Vector2(30, 73)
+wanted_level = "Openworld"
