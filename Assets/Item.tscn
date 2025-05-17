@@ -1,0 +1,170 @@
+[gd_scene load_steps=18 format=3 uid="uid://dofhhacq88dhq"]
+
+[ext_resource type="Script" uid="uid://miuwuvia4ea8" path="res://Assets/Scripts/item.gd" id="1_q3w4b"]
+[ext_resource type="Texture2D" uid="uid://8v735hix5qsj" path="res://Arta/Tilemap/sacu lu iohanis.png" id="2_h7ui4"]
+[ext_resource type="Texture2D" uid="uid://w4to3nmaxdln" path="res://Arta/Tilemap/faggot tilemap.png" id="3_h7ui4"]
+[ext_resource type="Texture2D" uid="uid://bqrdyxq5pqhju" path="res://Arta/Tilemap/punguta cu 2 bani.png" id="4_q3w4b"]
+[ext_resource type="Texture2D" uid="uid://qpv6cka3vvg3" path="res://Arta/Info Board/ExclamationMark-16x16.png" id="4_u8hp3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4umpa"]
+atlas = ExtResource("2_h7ui4")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3w4b"]
+atlas = ExtResource("3_h7ui4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iheov"]
+atlas = ExtResource("3_h7ui4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8hp3"]
+atlas = ExtResource("4_q3w4b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_121et"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4umpa")
+}],
+"loop": true,
+"name": &"big_money",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3w4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iheov")
+}],
+"loop": true,
+"name": &"child",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8hp3")
+}],
+"loop": true,
+"name": &"small_money",
+"speed": 1.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftjru"]
+size = Vector2(20, 19)
+
+[sub_resource type="Animation" id="Animation_rwf7r"]
+resource_name = "Up-Down"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.62451, 1.51572, 0.554785),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvdu0"]
+_data = {
+&"Up-Down": SubResource("Animation_rwf7r")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q3w4b"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.8
+angle_min = -180.0
+angle_max = 180.0
+spread = 104.268
+flatness = 0.293
+initial_velocity_max = 1.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.0
+turbulence_noise_speed_random = 0.84
+
+[sub_resource type="Animation" id="Animation_tru4g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v6env"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333, 2.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -1), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h7ui4"]
+_data = {
+&"RESET": SubResource("Animation_tru4g"),
+&"bob": SubResource("Animation_v6env")
+}
+
+[node name="Item" type="Node2D"]
+position = Vector2(0, 0.964211)
+script = ExtResource("1_q3w4b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_121et")
+animation = &"big_money"
+autoplay = "small_money"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_ftjru")
+
+[node name="Exclamation Mark" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_u8hp3")
+offset = Vector2(0, -38)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Exclamation Mark"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_nvdu0")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+lifetime = 5.0
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_q3w4b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h7ui4")
+}
+autoplay = "RESET"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

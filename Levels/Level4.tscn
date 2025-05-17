@@ -221,7 +221,7 @@ vertical = true
 
 [node name="Door" parent="." instance=ExtResource("14_7csao")]
 position = Vector2(-40, -104)
-wanted_level = "End"
+wanted_level = "Openworld"
 needs_key = true
 
 [node name="Coin" parent="." instance=ExtResource("19_3k6h0")]

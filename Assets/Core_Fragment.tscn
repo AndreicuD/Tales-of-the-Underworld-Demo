@@ -1,0 +1,191 @@
+[gd_scene load_steps=15 format=3 uid="uid://bppqbu37eqe75"]
+
+[ext_resource type="Script" uid="uid://f5giwbcky1tv" path="res://Assets/Scripts/core_fragment.gd" id="1_e21ti"]
+[ext_resource type="Texture2D" uid="uid://nn5ktdn6raeb" path="res://Arta/Tilemap/core tilemap.png" id="2_js2gr"]
+[ext_resource type="Texture2D" uid="uid://qpv6cka3vvg3" path="res://Arta/Info Board/ExclamationMark-16x16.png" id="4_w010w"]
+[ext_resource type="Texture2D" uid="uid://875qdx0yhc6n" path="res://Arta/Info Board/Panel.png" id="5_n6d3c"]
+[ext_resource type="Theme" uid="uid://beoh5k5sb22ui" path="res://Arta/Theme.tres" id="6_l3gar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e21ti"]
+atlas = ExtResource("2_js2gr")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_121et"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e21ti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftjru"]
+size = Vector2(20, 19)
+
+[sub_resource type="Animation" id="Animation_rwf7r"]
+resource_name = "Up-Down"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.62451, 1.51572, 0.554785),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nvdu0"]
+_data = {
+&"Up-Down": SubResource("Animation_rwf7r")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_js2gr"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.8
+angle_min = -180.0
+angle_max = 180.0
+spread = 104.268
+flatness = 0.293
+initial_velocity_max = 1.0
+gravity = Vector3(0, -1, 0)
+scale_min = 0.0
+turbulence_noise_speed_random = 0.84
+
+[sub_resource type="Animation" id="Animation_e21ti"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_js2gr"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 4), Vector2(3, 2), Vector2(3, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xpu01"]
+_data = {
+&"RESET": SubResource("Animation_e21ti"),
+&"bob": SubResource("Animation_js2gr")
+}
+
+[node name="Core Fragment" type="Node2D"]
+position = Vector2(0, 0.119744)
+script = ExtResource("1_e21ti")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_121et")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_ftjru")
+
+[node name="Exclamation Mark" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_w010w")
+offset = Vector2(0, -38)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Exclamation Mark"]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_nvdu0")
+}
+
+[node name="PopUp" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="TextureRect" parent="PopUp"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("5_n6d3c")
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="PopUp"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 188.0
+offset_top = 106.0
+offset_right = -189.0
+offset_bottom = -167.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_l3gar")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_font_sizes/font_size = 56
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="Ok Button" type="Button" parent="PopUp"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -115.0
+offset_right = 18.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_l3gar")
+theme_override_font_sizes/font_size = 31
+text = "OK"
+flat = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+lifetime = 5.0
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_js2gr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xpu01")
+}
+autoplay = "bob"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="PopUp/Ok Button" to="." method="_on_button_pressed"]

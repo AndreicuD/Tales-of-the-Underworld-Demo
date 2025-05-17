@@ -49,6 +49,12 @@ var gravity_when_save : bool = false
 var noclip_when_save : bool = false
 
 func _ready():
+	Quest.mother_spoken_to = false
+	Quest.husband_found = false
+	Quest.money_found_1 = false
+	Quest.child_found = false
+	Quest.selfish_spoken_to = false
+	Quest.money_found_2 = false
 	PLAYER = get_tree().get_first_node_in_group("Player")
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	gravity_cooldown = Timer.new()
@@ -61,6 +67,7 @@ func _ready():
 	pass
 
 func _physics_process(_delta):
+	print(Quest.key_pieces)
 	#reset player if health is below 0
 	if !Global.levels_visited.is_empty():
 		max_level = levels_visited.back()
@@ -219,7 +226,19 @@ func save_game():
 		"what_is_saved" : "currency",
 		"amount" : CURRENCY
 	}
-
+	
+	var quest_dic = {
+		"what_is_saved" : "quest",
+		"quests" : Quest.quests,
+		"key_pieces" : Quest.key_pieces,
+		"mother_spoken_to" : Quest.mother_spoken_to,
+		"husband_found" : Quest.husband_found,
+		"money_found_1" : Quest.money_found_1,
+		"child_found" : Quest.child_found,
+		"selfish_spoken_to" : Quest.selfish_spoken_to,
+		"money_found_2" : Quest.money_found_2,
+	}
+	
 	var level_dic = {
 		"what_is_saved" : "level_info",
 		"levels" : levels_visited,
@@ -238,6 +257,8 @@ func save_game():
 	save_game_file.store_line(currency_info)
 	var level_info = JSON.stringify(level_dic)
 	save_game_file.store_line(level_info)
+	var quest_info = JSON.stringify(quest_dic)
+	save_game_file.store_line(quest_info)
 	var spawn_point_info = JSON.stringify(spawn_point_dic)
 	save_game_file.store_line(spawn_point_info)
 
@@ -277,6 +298,13 @@ func load_game():
 					levels_visited.push_back(level)
 				for collectible in node_data['collectibles']:
 					collectibles_got.push_back(collectible)
+			"quest":
+				Quest.mother_spoken_to = node_data["mother_spoken_to"]
+				Quest.husband_found = node_data["husband_found"]
+				Quest.money_found_1 = node_data["money_found_1"]
+				Quest.child_found = node_data["child_found"]
+				Quest.selfish_spoken_to = node_data["selfish_spoken_to"]
+				Quest.money_found_2 = node_data["money_found_2"]
 
 	print("Game Loaded")
 
